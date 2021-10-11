@@ -87,7 +87,28 @@
   <img src="https://ljuglaret.github.io/NFP121/tp1/tp1.png" alt="Tp1">
 
     <hr />
+
+ 
     <h3>Question 2 :</h3>
+<h4>
+    Modifier le source "Picture.java" afin que le soleil soit bleu
+</h4>
+   
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'>sun.changeColor(<span style='color:#2A00FF'>"yellow"</span>);
+</pre>    devient 
+    
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'>sun.changeColor(<span style='color:#2A00FF'>"blue"</span>);</pre>
+   
+<h4>Ajouter une nouvelle donnée d'instance : un nouveau soleil (jaune...)</h4>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'>sun2 = <span style='font-weight:bold;color:#7B0052;'>new</span> Circle();
+        sun2.changeColor(<span style='color:#2A00FF'>"yellow"</span>);
+        sun2.moveHorizontal(0);
+        sun2.moveVertical(-10);
+        sun2.changeSize(60);
+        sun2.makeVisible();</pre>
+        <h4>
+            Ajouter une nouvelle méthode à la classe Picture permettant au soleil ( bleu) de se coucher (si la terre est fixe...)
+        </h4>
     J'ai décomposé le problème en deux parties : faire descendre un soleil d'une part, et gérer le cas "La fenêtre graphique n'a pas été initialisée"
     <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>void</span> coucherDeSoleilQuandToutVaBien()<span style='font-weight:bold;color:#D3171B'>{</span>
                 
