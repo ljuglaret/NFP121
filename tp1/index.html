@@ -1,0 +1,201 @@
+<html>
+
+<head>
+    
+
+
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+    <title>NFP121 - TP1</title>
+    <style type="text/css">
+        body {
+            background: #E5DED6;
+            background-color: #fff;
+            color: #333333;
+            font-size: 14px;
+            font-family: Verdana, Arial;
+        }
+
+        table {
+            font-size: 20px;
+            border-color: #808080;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        h2 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        hr {
+            margin: 15px 0 15px 0;
+        }
+    </style>
+
+</head>
+<body>
+    <h2 style="text-align: center">NFP 121 - TP1</h2>
+    <h2 style="text-align: center">L'environnement de programmation BlueJ</h2>
+    <br />
+    <hr>
+    <br />
+    <table>
+        <tr>
+            <td>Nom
+            </td>
+            <td> Juglaret
+            </td>
+        </tr>
+        <tr>
+            <td>Pr�nom
+            </td>
+            <td>Laure
+            </td>
+        </tr>
+        <tr>
+            <td>Matricule
+            </td>
+            <td>0G5DRL8UNZ3
+            </td>
+        </tr>
+    </table>
+    <br />
+    <hr />
+    <h3>Question 1 :</h3>
+    <h4> Instanciation d'un objet</h4>
+  <ul>
+      <li>
+        triangle1 :: Triangle
+      </li>
+      <li>
+        square1 :: Square
+      </li>
+      <li>
+        circle1 :: Circle
+      </li>
+  </ul>
+  et modification de leurs attributs (couleur et dimensions).
+  <img src="tp1.png" alt="Tp1">
+
+    <hr />
+    <h3>Question 2 :</h3>
+    J'ai décomposé le problème en deux parties : faire descendre un soleil d'une part, et gérer le cas "La fenêtre graphique n'a pas été initialisée"
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>void</span> coucherDeSoleilQuandToutVaBien()<span style='font-weight:bold;color:#D3171B'>{</span>
+                
+        <span style='color:#3F7F5F'>//copie du soleil bleu d'origine (sun)
+</span>                Circle  sunset = <span style='font-weight:bold;color:#7B0052;'>new</span> Circle();
+        sunset.changeColor(<span style='color:#2A00FF'>"blue"</span>);
+        sunset.moveHorizontal(180);
+        sunset.moveVertical(-10);
+        sunset.changeSize(60);
+
+        <span style='color:#3F7F5F'>//rend le soleil d'origine invisible
+</span>                sun.makeInvisible();
+
+        <span style='color:#3F7F5F'>// fait apparaitre puis descendre la copie du soleil 
+</span>                sunset.makeVisible();
+        sunset.slowMoveVertical(200); 
+
+        <span style='color:#3F7F5F'>// rend la copie invisible
+</span>                sunset.makeInvisible();            
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+Utilisation :  
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> coucherDeSoleil () <span style='font-weight:bold;color:#D3171B'>{</span>
+    <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+    coucherDeSoleilQuandToutVaBien();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#7B0052;'>catch</span>(NullPointerException ex)<span style='font-weight:bold;color:#D3171B'>{</span>
+        System.out.println(<span style='color:#2A00FF'>"il faut d'abord dessiner l'image avec la méthode draw()"</span>);
+        draw();
+        coucherDeSoleilQuandToutVaBien();
+    <span style='font-weight:bold;color:#D3171B'>}</span>       
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+Ainsi, on peut réiterer le coucher de soleil sans déclencher d'erreurs.
+
+    <hr />
+    <h3>Question 3 :</h3>
+
+<h4>Tests unitaires supplémentaires</h4>
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_nom_avec_accentGrave() <span style='font-weight:bold;color:#D3171B'>{</span>
+    question3.AuditeurCNAM auditeur1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question3.AuditeurCNAM(<span style='color:#2A00FF'>"Adèle"</span>,
+            <span style='color:#2A00FF'>"louise"</span>, <span style='color:#2A00FF'>"12345"</span>);
+    assertEquals(<span style='color:#2A00FF'>"Mme Adèle louise "</span>, <span style='color:#2A00FF'>"Adèle"</span>, auditeur1.nom());
+    assertEquals(<span style='color:#2A00FF'>"Mme Adèle louise "</span>, <span style='color:#2A00FF'>"louise"</span>, auditeur1.prenom());
+    assertEquals(<span style='color:#2A00FF'>" nom avec accent grave (è devient e) ? "</span>, <span style='color:#2A00FF'>"adele_l"</span>,
+        auditeur1.login());
+<span style='font-weight:bold;color:#D3171B'>}</span>
+
+       <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_prenom_avec_accentAigu() <span style='font-weight:bold;color:#D3171B'>{</span>
+    question3.AuditeurCNAM auditeur1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question3.AuditeurCNAM(<span style='color:#2A00FF'>"Durand"</span>,
+            <span style='color:#2A00FF'>"émilia"</span>, <span style='color:#2A00FF'>"12345"</span>);
+    assertEquals(<span style='color:#2A00FF'>"Mme Durand émilia "</span>, <span style='color:#2A00FF'>"Durand"</span>, auditeur1.nom());
+    assertEquals(<span style='color:#2A00FF'>"Mme Durand émilia "</span>, <span style='color:#2A00FF'>"émilia"</span>, auditeur1.prenom());
+    assertEquals(<span style='color:#2A00FF'>" prenom avec accent aigu (é devient e) ? "</span>, <span style='color:#2A00FF'>"durand_e"</span>,
+        auditeur1.login());
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+<h4>login auditeur/auditrice</h4>
+Au préalable je définis la méthode "sansAccents" qui a une chainde de caractère retourne
+cette chaine de caractères en remplaçant 'é' et 'è' par 'e'.
+    <pre class="line-numbers">
+        <code class="language-java">    
+            public static String sansAccents(String str){
+                String str1 = str.replaceAll("é","e");
+                String str2 = str1.replaceAll("è","e");
+                return str2;
+            }
+        </code>
+    </pre>
+    Pour commencer je formate le prénom et le nom afin d'enlever les accents et remplacer tous les caractères qui ne sont pas des lettres par le caractère '_'. Enfin j'isole la première lettre du prénom.
+
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'>String prenomSansAccents = sansAccents(prenom);
+        String nomSansAccents = sansAccents(nom);
+        String nomFormate = nomSansAccents.replaceAll(<span style='color:#2A00FF'>"[^a-zA-Z0-9]"</span>, <span style='color:#2A00FF'>"_"</span>).toLowerCase();
+
+        <span style='font-weight:bold;color:#7B0052;'>char</span> premiereLettrePrenomMinuscule = prenom.toLowerCase().charAt(0);</pre>
+    Ensuite je distingue deux cas : <br> soit le nom contient au moins 6 caractères, ce qui peut se traduire par : 
+    <pre class="line-numbers">
+        <code class="language-java">
+             nomFormate.toLowerCase()+"_"+premiereLettrePrenomMinuscule;
+        </code>
+    </pre>
+
+    soit il en contient moins de 6   ce qui peut s'écrire :
+
+    <pre class="line-numbers">
+        <code class="language-java">nomFormate.substring(0,6).toLowerCase()+"_"+premiereLettrePrenomMinuscule;
+        </code>
+    </pre>
+    D'où le code final: 
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'>String log = <span style='color:#2A00FF'>""</span>;
+        String prenomSansAccents = sansAccents(prenom);
+        <span style='color:#3F7F5F'>//Normalizer.normalize(prenom, Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+</span>        <span style='font-weight:bold;color:#7B0052;'>char</span> premiereLettrePrenomMinuscule = prenomSansAccents.toLowerCase().charAt(0);
+        String nomSansAccents = sansAccents(nom);
+        String nomFormate = nomSansAccents.replaceAll(<span style='color:#2A00FF'>"[^a-zA-Z0-9]"</span>, <span style='color:#2A00FF'>"_"</span>).toLowerCase();
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (nomFormate .length() &lt; 6) <span style='font-weight:bold;color:#D3171B'>{</span>
+            log = nomFormate+<span style='color:#2A00FF'>"_"</span>+premiereLettrePrenomMinuscule;
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span>
+            log =  nomFormate.substring(0,6)+<span style='color:#2A00FF'>"_"</span>+premiereLettrePrenomMinuscule;
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> log;</pre>
+
+    <br />
+    <hr />
+    
+        <h3>Conclusion, biliographie et remarques :</h3>
+        <i style="font-size:12px;">... Une seule page html, limitez le nombre de clics, (plus de 200 rapports � corriger chaque semaine)</i>
+    
+</body>
+</html>
