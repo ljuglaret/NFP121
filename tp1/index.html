@@ -111,23 +111,9 @@
         </h4>
     J'ai décomposé le problème en deux parties : faire descendre un soleil d'une part, et gérer le cas "La fenêtre graphique n'a pas été initialisée"
     <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>void</span> coucherDeSoleilQuandToutVaBien()<span style='font-weight:bold;color:#D3171B'>{</span>
-                
-        <span style='color:#3F7F5F'>//copie du soleil bleu d'origine (sun)
-</span>                Circle  sunset = <span style='font-weight:bold;color:#7B0052;'>new</span> Circle();
-        sunset.changeColor(<span style='color:#2A00FF'>"blue"</span>);
-        sunset.moveHorizontal(180);
-        sunset.moveVertical(-10);
-        sunset.changeSize(60);
-
-        <span style='color:#3F7F5F'>//rend le soleil d'origine invisible
-</span>                sun.makeInvisible();
-
-        <span style='color:#3F7F5F'>// fait apparaitre puis descendre la copie du soleil 
-</span>                sunset.makeVisible();
-        sunset.slowMoveVertical(200); 
-
-        <span style='color:#3F7F5F'>// rend la copie invisible
-</span>                sunset.makeInvisible();            
+        sun.slowMoveVertical(200); 
+        sun.makeInvisible(); 
+        sun.slowMoveVertical(-200);         
     <span style='font-weight:bold;color:#D3171B'>}</span></pre>
 
 Utilisation :  
