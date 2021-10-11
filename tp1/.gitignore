@@ -3,7 +3,8 @@ expose uniquement les sources (et le fichier index.html => gh.pages)
 css
 doc
 images
-bluej.pckg
+bluej.pkg
 submission.defs
 submitter.properties
+package.bluej
 tp.html
