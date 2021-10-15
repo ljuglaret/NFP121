@@ -33,18 +33,40 @@ public class EntierPositifTest extends junit.framework.TestCase{
               assertEquals(4, e.getEntier());
         }
         catch(Throwable exc){
-            fail("une exception n'est pas attendue ici"); } }
+            fail("une exception n'est pas attendue ici"); }
+        }
   
-  public void testDecEntierPositif(){ Entier e = new EntierPositif(0); try{
-  e.dec(); fail("une exception est attendue"); }catch(EntierPositifException
-  exc){ assertEquals("dec en défaut", exc.getMessage()); } e = new
-  EntierPositif(3); try{ e.dec(); assertEquals(2, e.getEntier());
-  }catch(Throwable exc){ fail("une exception n'est pas attendue ici"); } }
+  public void testDecEntierPositif(){
+      Entier e = new EntierPositif(0);
+      try{
+          e.dec(); fail("une exception est attendue"); }catch(EntierPositifException exc){
+              assertEquals("dec en défaut", exc.getMessage());
+            } e = new EntierPositif(3);
+            try{
+                e.dec();
+                assertEquals(2, e.getEntier());
+          }
+          catch(Throwable exc){
+              fail("une exception n'est pas attendue ici");
+            }
+        }
   
-  public void testSetEntierEntierPositif(){ Entier e = new EntierPositif(0);
-  try{ e.setEntier(-5); fail("une exception est attendue");
-  }catch(EntierPositifException exc){ assertEquals("setEntier en défaut",
-  exc.getMessage()); } e = new EntierPositif(3); try{ e.setEntier(2);
-  assertEquals(2, e.getEntier()); }catch(EntierPositifException exc){
-  fail("une exception n'est pas attendue ici"); } } }
+  public void testSetEntierEntierPositif(){
+      Entier e = new EntierPositif(0);
+      try{
+          e.setEntier(-5); fail("une exception est attendue");
+      }
+      catch(EntierPositifException exc){
+          assertEquals("setEntier en défaut",exc.getMessage());
+        }
+        e = new EntierPositif(3);
+        try{
+            e.setEntier(2);
+            assertEquals(2, e.getEntier());
+        }
+        catch(EntierPositifException exc){
+          fail("une exception n'est pas attendue ici"); 
+        }
+    }
+}
  
