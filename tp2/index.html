@@ -54,13 +54,13 @@
         <tbody><tr>
             <td>Nom
             </td>
-            <td>...
+            <td>Juglaret
             </td>
         </tr>
         <tr>
-            <td>Pr�nom
+            <td>Prénom
             </td>
-            <td>...
+            <td>Laure
             </td>
         </tr>
         <tr>
@@ -72,19 +72,15 @@
     </tbody></table>
     <br>
     <hr>
-    <h3>Question 1 : canversion Fahrenheit - Celsius</h3>
-    Votre r�ponse...
-		
-    <hr>
-    <h3>Question 1.1 : classe de test</h3>
+    <h3>Question 1 : Conversion Fahrenheit - Celsius</h3>
 
     Fonction de conversion fahrenheitEnCelsius
 
     <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>float</span> fahrenheitEnCelsius(<span style='font-weight:bold;color:#7B0052;'>int</span> f) <span style='font-weight:bold;color:#D3171B'>{</span>
-        <span style='font-weight:bold;color:#7B0052;'>return</span>  (<span style='font-weight:bold;color:#7B0052;'>float</span>)((<span style='font-weight:bold;color:#7B0052;'>int</span>)(10*((<span style='font-weight:bold;color:#7B0052;'>float</span>)(f - 32 ) * 5/9) ))/10  ;
+        <span style='font-weight:bold;color:#7B0052;'>return</span> (<span style='font-weight:bold;color:#7B0052;'>float</span>) ((<span style='font-weight:bold;color:#7B0052;'>int</span>) (10 * ((<span style='font-weight:bold;color:#7B0052;'>float</span>) (f - 32) * 5 / 9))) / 10;
     <span style='font-weight:bold;color:#D3171B'>}</span></pre>
 
-    <br>
+ 
 
     Appel de fahrenheitEnCelsius sur un tableau de String passé en paramètre
 
@@ -96,9 +92,10 @@
             System.out.println(fahrenheit + <span style='color:#2A00FF'>"\u00B0F -&gt; "</span> + celsius + <span style='color:#2A00FF'>"\u00B0C"</span>); 
         <span style='font-weight:bold;color:#D3171B'>}</span>
     <span style='font-weight:bold;color:#D3171B'>}</span></pre>
-
-    <br>
-    
+		
+    <hr>
+    <h3>Question 1.1 : La classe de tests unitaires "FahrenheitCelsiusTest" </h3>
+ 
     Tests supplémentaires
     <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_fahrenheitEnCelsiusNeg() <span style='font-weight:bold;color:#D3171B'>{</span>
         assertEquals(<span style='color:#2A00FF'>"   -27 �F -&gt; -32.7�C ?"</span>, -32.7, question1.FahrenheitCelsius.fahrenheitEnCelsius(-27), 0.1);
@@ -112,12 +109,14 @@
     
     <hr>
     <h3>Question 2 : Exception "runtime"</h3>
+    Il suffit d'ajouter  <b> throws NumberFormatException </b> à la méthode de conversion définie à la question précedente.
     <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span>  <span style='font-weight:bold;color:#7B0052;'>float</span> fahrenheitEnCelsius(<span style='font-weight:bold;color:#7B0052;'>int</span> celsiusInt) <span style='font-weight:bold;color:#7B0052;'>throws</span> NumberFormatException <span style='font-weight:bold;color:#D3171B'>{</span>
         <span style='font-weight:bold;color:#7B0052;'>return</span>  question1.FahrenheitCelsius.fahrenheitEnCelsius(celsiusInt);
     <span style='font-weight:bold;color:#D3171B'>}</span></pre>
     <br>
     <hr>
-    <h3>Question 2.1</h3>
+    <h3>Question 2.1 : La classe de tests unitaires</h3>
+    On peut ajouter un test vérifiant que les chaînes invalides retourne bien une exception.
     <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_fahrenheitEnCelsiusAvecException1() <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception<span style='font-weight:bold;color:#D3171B'>{</span>
         String[] out = mainExec(<span style='color:#2A00FF'>"question2.FahrenheitCelsius"</span>,new String[]<span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#2A00FF'>"100"</span>,<span style='color:#2A00FF'>"x"</span>,<span style='color:#2A00FF'>"-27"</span><span style='font-weight:bold;color:#D3171B'>}</span>);
         assertTrue(out[0].endsWith(<span style='color:#2A00FF'>"100�F -&gt; 37.7�C"</span>));
@@ -125,10 +124,10 @@
         assertTrue(out[2].endsWith(<span style='color:#2A00FF'>"-27�F -&gt; -32.7�C"</span>));
       <span style='font-weight:bold;color:#D3171B'>}</span></pre>
 
-    <h3>Question 3 :</h3>
+    <h3>Question 3 : IHM </h3>
 	<br>
     <hr>
-    <h3>Question 3.1 :</h3>
+    <h3>Question 3.1 : Prise en compte de l'exception "NumberFormatException"</h3>
     <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed( ActionEvent ae )<span style='font-weight:bold;color:#D3171B'>{</span>
         FahrenheitCelsius f = <span style='font-weight:bold;color:#7B0052;'>new</span> FahrenheitCelsius();
         <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
@@ -143,21 +142,13 @@
     <span style='font-weight:bold;color:#D3171B'>}</span></pre>
     <br>
     <hr>
-    <h3>Question 3.2 :</h3>
+  
+    <h3>Question 3.3 :  Prise en compte du zéro absolu</h3>
     Votre r�ponse...
 
     <br>
     <hr>
-    <h3>Question 3.3 :</h3>
-    Votre r�ponse...
-
-    <br>
-    <hr>
-    <h3>Question 3.4 :</h3>
-    Votre r�ponse...
-	
-    <br>
-    <hr>    
+      
         <h3>Conclusion, biliographie et remarques :</h3>
-        <a href = "">Sources</a>
+        <a href = "https://github.com/ljuglaret/NFP121/tree/gh-pages/tp2">Sources</a>
     </body></html>

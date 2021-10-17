@@ -11,7 +11,8 @@ public class FahrenheitCelsius {
     /**
      * le point d'entrée de cette application, dont le commentaire est à compléter
      * 
-     * @param args ...
+     * @param args tableau de chaines de caractères représentant des degrés
+     *             fahrenheit
      */
     public static void main(String[] args) {
         // pour tous les paramètres de la ligne de commande
