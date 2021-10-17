@@ -41,4 +41,14 @@ public class EntierPositif extends Entier
         }
         super.inc();
     }
+        
+    public static EntierPositif parseEntier(String str) throws NumberFormatException{
+        Entier sortie = Entier.parseEntier(str);
+        System.out.println(sortie.getEntier());
+        if(sortie.getEntier() <= 0 ){
+            throw new EntierPositifException("parseEntier en défaut");
+        }
+        return new EntierPositif(sortie.getEntier());
+    
+    }
 }

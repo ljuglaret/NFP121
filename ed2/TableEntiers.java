@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class TableEntiers implements Iterable<Entier> {
-  private Entier[] table;
+  private Entier[] table; 
   private int taille = 0;
 
   public boolean repOk() {
@@ -38,7 +38,7 @@ public class TableEntiers implements Iterable<Entier> {
   }
 
   public void ajouter(Entier e) throws TablePleineException {
-    if (e == null) {
+    if (e == null || !repOk()) {
       throw new NullPointerException("null");
     }
     if (estPleine()) {
@@ -49,7 +49,7 @@ public class TableEntiers implements Iterable<Entier> {
   }
 
   public void retirer(Entier e) throws TableVideException {
-    if (estVide()) {
+    if (!repOk()) {
       throw new TableVideException("La table est vide, on ne peut rien retirer");
     }
     boolean present = false;
@@ -71,7 +71,7 @@ public class TableEntiers implements Iterable<Entier> {
 
   public boolean contient(Entier e) throws TableVideException {
 
-    if (estVide()) {
+    if (!repOk()) {
       throw new TableVideException("La table est vide");
     }
     for (int i = 0; i < table.length; i++) {
