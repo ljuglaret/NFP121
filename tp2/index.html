@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html><head><title>NFP121 - TP1</title>
+
+    
+    
+    <style type="text/css">
+        body {
+            background: #E5DED6;
+            background-color: #fff;
+            color: #333333;
+            font-size: 14px;
+            font-family: Verdana, Arial;
+        }
+
+        table {
+            font-size: 20px;
+            border-color: #808080;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        h2 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        hr {
+            margin: 15px 0 15px 0;
+        }
+		
+		applet {
+			margin: 10px 0px 25px 250px;
+			border-width: 1px;
+			border-style: solid;
+			border-color: #777777;
+		}
+		
+    </style></head><body>
+    <h2 style="text-align: center;">NFP 121 - TP2</h2>
+    <h2 style="text-align: center;">Conversion Fahrenheit - Celsius</h2>
+    <br>
+    <hr>
+    <br>
+    <table>
+        <tbody><tr>
+            <td>Nom
+            </td>
+            <td>...
+            </td>
+        </tr>
+        <tr>
+            <td>Pr�nom
+            </td>
+            <td>...
+            </td>
+        </tr>
+        <tr>
+            <td>Matricule
+            </td>
+            <td>...
+            </td>
+        </tr>
+    </tbody></table>
+    <br>
+    <hr>
+    <h3>Question 1 : canversion Fahrenheit - Celsius</h3>
+    Votre r�ponse...
+		
+    <hr>
+    <h3>Question 1.1 : classe de test</h3>
+
+    Fonction de conversion fahrenheitEnCelsius
+
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>float</span> fahrenheitEnCelsius(<span style='font-weight:bold;color:#7B0052;'>int</span> f) <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span>  (<span style='font-weight:bold;color:#7B0052;'>float</span>)((<span style='font-weight:bold;color:#7B0052;'>int</span>)(10*((<span style='font-weight:bold;color:#7B0052;'>float</span>)(f - 32 ) * 5/9) ))/10  ;
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br>
+
+    Appel de fahrenheitEnCelsius sur un tableau de String passé en paramètre
+
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> main(String[] args) <span style='font-weight:bold;color:#D3171B'>{</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>for</span> (String arg : args ) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>int</span> fahrenheit = Integer.parseInt(arg);
+            <span style='font-weight:bold;color:#7B0052;'>float</span> celsius = fahrenheitEnCelsius(fahrenheit);
+            System.out.println(fahrenheit + <span style='color:#2A00FF'>"\u00B0F -&gt; "</span> + celsius + <span style='color:#2A00FF'>"\u00B0C"</span>); 
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br>
+    
+    Tests supplémentaires
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_fahrenheitEnCelsiusNeg() <span style='font-weight:bold;color:#D3171B'>{</span>
+        assertEquals(<span style='color:#2A00FF'>"   -27 �F -&gt; -32.7�C ?"</span>, -32.7, question1.FahrenheitCelsius.fahrenheitEnCelsius(-27), 0.1);
+    <span style='font-weight:bold;color:#D3171B'>}</span>  
+       <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_fahrenheitEnCelsius2() <span style='font-weight:bold;color:#D3171B'>{</span>
+        assertEquals(<span style='color:#2A00FF'>"   60 �F -&gt; 15.5�C ?"</span>, 15.5, question1.FahrenheitCelsius.fahrenheitEnCelsius(60), 0.1);
+    <span style='font-weight:bold;color:#D3171B'>}</span>  
+       <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_fahrenheitEnCelsius3() <span style='font-weight:bold;color:#D3171B'>{</span>
+        assertEquals(<span style='color:#2A00FF'>"   90 �F -&gt; -32.7�C ?"</span>, 32.2, question1.FahrenheitCelsius.fahrenheitEnCelsius(90), 0.1);
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    
+    <hr>
+    <h3>Question 2 : Exception "runtime"</h3>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span>  <span style='font-weight:bold;color:#7B0052;'>float</span> fahrenheitEnCelsius(<span style='font-weight:bold;color:#7B0052;'>int</span> celsiusInt) <span style='font-weight:bold;color:#7B0052;'>throws</span> NumberFormatException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span>  question1.FahrenheitCelsius.fahrenheitEnCelsius(celsiusInt);
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br>
+    <hr>
+    <h3>Question 2.1</h3>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_fahrenheitEnCelsiusAvecException1() <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception<span style='font-weight:bold;color:#D3171B'>{</span>
+        String[] out = mainExec(<span style='color:#2A00FF'>"question2.FahrenheitCelsius"</span>,new String[]<span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#2A00FF'>"100"</span>,<span style='color:#2A00FF'>"x"</span>,<span style='color:#2A00FF'>"-27"</span><span style='font-weight:bold;color:#D3171B'>}</span>);
+        assertTrue(out[0].endsWith(<span style='color:#2A00FF'>"100�F -&gt; 37.7�C"</span>));
+        assertTrue(out[1].toUpperCase().contains(<span style='color:#2A00FF'>"EXCEPTION"</span>));
+        assertTrue(out[2].endsWith(<span style='color:#2A00FF'>"-27�F -&gt; -32.7�C"</span>));
+      <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <h3>Question 3 :</h3>
+	<br>
+    <hr>
+    <h3>Question 3.1 :</h3>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed( ActionEvent ae )<span style='font-weight:bold;color:#D3171B'>{</span>
+        FahrenheitCelsius f = <span style='font-weight:bold;color:#7B0052;'>new</span> FahrenheitCelsius();
+        <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>int</span> fahrenheit = Integer.parseInt(entree.getText());
+            <span style='font-weight:bold;color:#7B0052;'>if</span> (celsius &lt; zeroAbsC)<span style='font-weight:bold;color:#D3171B'>{</span>
+                 celsius = zeroAbsC;
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+            sortie.setText(Float.toString( celsius));
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(NumberFormatException nfe)<span style='font-weight:bold;color:#D3171B'>{</span>
+            sortie.setText(<span style='color:#2A00FF'>"error ! "</span>);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br>
+    <hr>
+    <h3>Question 3.2 :</h3>
+    Votre r�ponse...
+
+    <br>
+    <hr>
+    <h3>Question 3.3 :</h3>
+    Votre r�ponse...
+
+    <br>
+    <hr>
+    <h3>Question 3.4 :</h3>
+    Votre r�ponse...
+	
+    <br>
+    <hr>    
+        <h3>Conclusion, biliographie et remarques :</h3>
+        <a href = "">Sources</a>
+    </body></html>
