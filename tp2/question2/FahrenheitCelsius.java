@@ -1,25 +1,21 @@
 package question2;
 
 /**
- * classe FahrenheitCelsius : similaire ï¿½ la question mais avec gestion
- * exception
- * 
- * @Laure Juglaret @v1.0.0
+ * Classe FahrenheitCelsius.
  */
 public class FahrenheitCelsius {
 
     /**
-     * le point d'entrï¿½e de cette application, dont le commentaire est ï¿½ complï¿½ter
-     *
-     * @param args un tableau de tempï¿½ratures en degrï¿½ Fahrenheit, chacune
-     *             reprï¿½sentï¿½e sous forme de String
-     */
+    * Méthode principale
+    * @param args tableau de chaines de caracteres representant des degres
+    *             fahrenheit
+    */
     public static void main(String[] args) throws NumberFormatException {
         for (String arg : args) {
             try {
                 int fInt = Integer.parseInt(arg);
                 float celsius = fahrenheitEnCelsius(fInt);
-                System.out.println(arg + "\u00B0F -> " + celsius + "\u00B0C"); // ligne,
+                System.out.println(arg + "\u00B0F -> " + celsius + "\u00B0C"); 
             } catch (NumberFormatException e) {
                 System.out.println("EXCEPTION");
             }
@@ -27,10 +23,9 @@ public class FahrenheitCelsius {
     }
 
     /**
-     * la mï¿½thode ï¿½ complï¿½ter.
-     * 
-     * @param f la valeur en degrï¿½ Fahrenheit sous forme de chaï¿½ne de caractï¿½res
-     * @return la conversion en degrï¿½ Celsius
+     * Fonction de conversion Fahrenheit vers Celsius en remontant si besoin l'erreur  NumberFormatException
+     * @param f la valeur en degre Fahrenheit
+     * @return la conversion en degre Celsius
      */
 
     public static float fahrenheitEnCelsius(int celsiusInt) throws NumberFormatException {

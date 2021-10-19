@@ -1,7 +1,3 @@
-/**
- * @Laure Juglaret
- * @v1.0.0
- */
 package question3;
 
 import javax.swing.JButton;
@@ -12,10 +8,12 @@ import java.awt.*;
 import java.awt.event.*;
 import org.junit.Test;
 import question2.*;
-
+/**
+ * Classe IHMFahrenheit
+ */
 public class IHMFahrenheit extends JFrame implements ActionListener   {
     /**
-     * 
+     * Création de l'interface graphique
      */
     private JTextField entree = new JTextField( 6 );
     /** Le bouton de conversion. */
@@ -43,7 +41,7 @@ public class IHMFahrenheit extends JFrame implements ActionListener   {
      * remarquer que le champs de droite (les degrés Celsius) n'est pas éditable.
      * @param ae l'événement transmis
      */
-    @SuppressWarnings("static-access")
+    
     public void actionPerformed( ActionEvent ae ){
         FahrenheitCelsius f = new FahrenheitCelsius();
         try{
@@ -63,7 +61,9 @@ public class IHMFahrenheit extends JFrame implements ActionListener   {
         }
     }
 
-
+    /**
+     * Méthode principlae
+     */
     public static void main(String[] args){
         new IHMFahrenheit();
     }

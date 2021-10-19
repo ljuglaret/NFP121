@@ -1,5 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
-<html><head><title>NFP121 - TP1</title>
+<html><head><title>NFP121 - TP2</title>
 
     
     
@@ -66,7 +66,7 @@
         <tr>
             <td>Matricule
             </td>
-            <td>...
+            <td>0G5DRL8UNZ3
             </td>
         </tr>
     </tbody></table>
@@ -144,8 +144,47 @@
     <hr>
   
     <h3>Question 3.3 :  Prise en compte du zéro absolu</h3>
-    Votre r�ponse...
 
+    J'ai défini deux variables <b>zeroAbsC</b> et <b>zeroAbsF</b> représentant le zéro absolu respectivement en degré Celsius et en degré Fahrenheit
+    <br>
+    Le cast de double vers float évite l'erreur "perte de précision".
+    <br>
+    <p>
+    <code>
+    float zeroAbsC = (float)-273.15;
+    float zeroAbsF = (float)(-459.67);
+    </code>
+</p>
+<p>
+    Dans le code ci dessous : 
+    <ul><li>La première ligne est un test pour le zéro absolu.</li>
+    <li>Les deux lignes garantissent que la valeur minimale ne peut être inférieure à -273.1°C.</li>
+</ul>
+</p>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'>junit.framework.TestCase.assertEquals(<span style='color:#2A00FF'>"zero absolu"</span>,f.fahrenheitEnCelsius((<span style='font-weight:bold;color:#7B0052;'>int</span>)zeroAbsF),zeroAbsC,0.6);
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (celsius &lt; zeroAbsC)<span style='font-weight:bold;color:#D3171B'>{</span>
+            celsius = zeroAbsC;
+        <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    En modifiant la méthode actionPerformed définie précedemment : 
+
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed( ActionEvent ae )<span style='font-weight:bold;color:#D3171B'>{</span>
+        FahrenheitCelsius f = <span style='font-weight:bold;color:#7B0052;'>new</span> FahrenheitCelsius();
+        <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>int</span> fahrenheit = Integer.parseInt(entree.getText()); 
+            <span style='font-weight:bold;color:#7B0052;'>float</span> celsius = f.fahrenheitEnCelsius(fahrenheit) ;  
+            <span style='font-weight:bold;color:#7B0052;'>float</span> zeroAbsC = (<span style='font-weight:bold;color:#7B0052;'>float</span>)-273.15;
+            <span style='font-weight:bold;color:#7B0052;'>float</span> zeroAbsF = (<span style='font-weight:bold;color:#7B0052;'>float</span>)(-459.67);
+           
+             junit.framework.TestCase.assertEquals(<span style='color:#2A00FF'>"zero absolu"</span>,f.fahrenheitEnCelsius((<span style='font-weight:bold;color:#7B0052;'>int</span>)zeroAbsF),zeroAbsC,0.6);
+             <span style='font-weight:bold;color:#7B0052;'>if</span> (celsius &lt; zeroAbsC)<span style='font-weight:bold;color:#D3171B'>{</span>
+                 celsius = zeroAbsC;
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+            sortie.setText(Float.toString( celsius));
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(NumberFormatException nfe)<span style='font-weight:bold;color:#D3171B'>{</span>
+            sortie.setText(<span style='color:#2A00FF'>"error ! "</span>);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
     <br>
     <hr>
       

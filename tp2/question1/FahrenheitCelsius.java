@@ -1,7 +1,7 @@
 package question1;
 
 /**
- * 
+ * Classe FahrenheitCelsius.
  * @Laure Juglaret @v1.0.0
  */
 public class FahrenheitCelsius {
@@ -9,9 +9,8 @@ public class FahrenheitCelsius {
     }
 
     /**
-     * le point d'entrée de cette application, dont le commentaire est à compléter
-     * 
-     * @param args tableau de chaines de caractères représentant des degrés
+     * M�thode principale
+     * @param args tableau de chaines de caracteres representant des degres
      *             fahrenheit
      */
     public static void main(String[] args) {
@@ -26,10 +25,10 @@ public class FahrenheitCelsius {
     }
 
     /**
-     * la méthode à compléter.
+     *Fonction de conversion Fahrenheit vers Celsius en remontant si besoin l'erreur  NumberFormatException
      * 
-     * @param f la valeur en degré Fahrenheit
-     * @return la conversion en degré Celsius
+     * @param f la valeur en degre Fahrenheit
+     * @return la conversion en degre Celsius
      */
     public static float fahrenheitEnCelsius(int f) {
         return (float) ((int) (10 * ((float) (f - 32) * 5 / 9))) / 10;
