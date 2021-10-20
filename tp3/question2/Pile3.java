@@ -18,24 +18,42 @@ public class Pile3 implements PileI {
     public Pile3() {
         this(0);
     }
-
+    
+    /**
+     * Création d'une pile.
+     * 
+     * @param taille
+     *            la taille de la pile, la taille doit être > 0
+     */
     public Pile3(int taille) {
-        // traiter le cas <=0
-        // à compléter
+        if (taille < 0){
+            this.v = new Vector<Object>(PileI.CAPACITE_PAR_DEFAUT );
+            throw new NumberFormatException("la taille ne peut pas être négative");
+        }
+        this.v = new Vector<Object>(taille);
     }
 
     public void empiler(Object o) throws PilePleineException {
+        if(estPleine()){
+            throw new PilePleineException();
+        }
         v.add(o);
-        // à compléter
     }
 
     public Object depiler() throws PileVideException {
-        return null;
+        if(estVide()){
+            throw new PileVideException();
+        }
+        Object dernierElement = v.lastElement();
+        v.remove(taille() - 1 );
+        return dernierElement;
     }
 
     public Object sommet() throws PileVideException {
-        // à compléter
-        return null;
+         if (estVide()){
+            throw new PileVideException();
+        }
+        return v.lastElement();
     }
 
     public int taille() {
@@ -51,17 +69,29 @@ public class Pile3 implements PileI {
     }
 
     public boolean estPleine() {
-        return false;
+        return capacite() == taille();
     }
 
     public String toString() {
-        // à compléter
-        return "";
+        String s = "[";
+        for (int i =  v.size() - 1 ; i >=0 ; i--){
+            s+= v.get(i);
+            if(i > 0) {
+                s+=", ";
+            }
+        }
+        return s+ "]";
     }
 
     public boolean equals(Object o) {
-        // à compléter
-        return false;
+          if (o instanceof PileI) {
+              PileI p = (PileI) o;
+              return this.capacite() == p.capacite()
+                  && this.hashCode() == p.hashCode();
+        }
+        else{
+            return false;
+        }
     }
 
     // fonction fournie

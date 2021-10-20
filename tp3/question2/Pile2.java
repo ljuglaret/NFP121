@@ -25,13 +25,14 @@ public class Pile2 implements PileI {
             throw new NumberFormatException("la taille ne peut pas être négative");
         }
         else{
-            stk = new Stack();
+            stk = new Stack<Object>();
             this.capacite = taille;
         }
     }
 
     // constructeur fourni
     public Pile2() {
+
         this(0);
     }
 
@@ -82,10 +83,12 @@ public class Pile2 implements PileI {
      */
     public String toString() {
         String s = "[";
-        for (int i = 0 ; i < stk.size() - 1 ; i++){
-            s+= stk.get(i)+",";
+        for (int i =  stk.size() - 1 ; i >=0 ; i--){
+            s+= stk.get(i);
+            if(i > 0) {
+                s+=", ";
+            }
         }
-        s+=stk.get(stk.size() - 1 );
         return s+ "]";
     }
 
@@ -120,7 +123,13 @@ public class Pile2 implements PileI {
      * @return le nombre d'élément
      */
     public int capacite() {
-        return capacite;
+        if(capacite < 0){
+            return this.CAPACITE_PAR_DEFAUT ;
+        }
+        else{
+            return capacite;
+
+        }
     }
 
 } // Pile2.java

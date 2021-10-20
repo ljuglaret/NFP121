@@ -68,7 +68,7 @@ public class PileTest extends junit.framework.TestCase {
 
     public void test_Pile_TailleNegative() {
         PileI p = new question2.Pile(-3);
-        assertEquals(p.CAPACITE_PAR_DEFAUT, p.capacite());
+        assertEquals(0, p.capacite());
 
     }
 

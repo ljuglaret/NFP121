@@ -41,7 +41,7 @@ public class PilesAuMemeComportement extends junit.framework.TestCase {
         assertEquals(p1.sommet(), p2.sommet());
         assertEquals(p2.sommet(), p3.sommet());
         assertEquals(p3.sommet(), p4.sommet());
-
+        
         String s = (String) p1.depiler();
         assertEquals(s, (String) p2.depiler());
         assertEquals(s, (String) p3.depiler());
@@ -87,8 +87,8 @@ public class PilesAuMemeComportement extends junit.framework.TestCase {
 
         p4.empiler("azerty");
         p3.empiler("azerty");
-        p2.empiler("azerty");
-        p1.empiler("azerty");
+        p2.empiler("azerty"); 
+        p1.empiler("azerty");  
 
         assertEquals("p1.sommet() != p2.sommet() ??? ", p1.sommet(), p2.sommet());
         assertEquals("p2.sommet() != p3.sommet() ??? ", p2.sommet(), p3.sommet());
@@ -103,7 +103,7 @@ public class PilesAuMemeComportement extends junit.framework.TestCase {
         p4.empiler("azer");
         p3.empiler("azer");
         p2.empiler("azer");
-        p1.empiler("azer");
+        p1.empiler("azer"); 
 
         assertEquals("p1.toString() != p2.toString() ?? ", p1.toString(), p2.toString());
         assertEquals("p2.toString() != p3.toString() ?? ",p2.toString(), p3.toString());
@@ -124,7 +124,7 @@ public class PilesAuMemeComportement extends junit.framework.TestCase {
         p4.empiler("azer");
         p3.empiler("azer");
         p2.empiler("azer");
-        p1.empiler("azer");
+        p1.empiler("azer"); 
 
         assertEquals("p1.toString() != p2.toString() ?? ", p1.toString(), p2.toString());
         assertEquals("p2.toString() != p3.toString() ?? ",p2.toString(), p3.toString());
@@ -145,7 +145,7 @@ public class PilesAuMemeComportement extends junit.framework.TestCase {
         p4.depiler();
         p3.depiler();
         p2.depiler();
-        p1.depiler();
+        p1.depiler(); 
 
         assertEquals("p1.toString() != p2.toString() ?? ", p1.toString(), p2.toString());
         assertEquals("p2.toString() != p3.toString() ?? ",p2.toString(), p3.toString());

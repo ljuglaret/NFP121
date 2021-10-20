@@ -13,13 +13,19 @@ public class Pile implements PileI {
 
     private Object[] zone;
     private int ptr;
-
+    
+    /**
+     * Création d'une pile.
+     * 
+     * @param taille
+     *            la taille de la pile, la taille doit être > 0
+     */
     public Pile(int taille) {
         if (taille < 0){
-            this.zone = new Integer[this.CAPACITE_PAR_DEFAUT] ;
+            this.zone = new Object[this.CAPACITE_PAR_DEFAUT] ;
         }
         else{
-            this.zone = new Integer[taille];
+            this.zone = new Object[taille];
         }
         this.ptr = 0;
         
