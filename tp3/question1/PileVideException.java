@@ -1,16 +1,19 @@
 package question1;
 
 /**
- * Décrivez votre classe PilePleineException ici.
- * 
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * Classe PileVideException
  */
 public class PileVideException extends Exception {
+    /**
+    * sans message d'erreur
+    */
     public  PileVideException() {
     super();
   }
 
+    /**
+    * avec message d'erreur
+    */
   public  PileVideException(String s) {
     super(s);
   }

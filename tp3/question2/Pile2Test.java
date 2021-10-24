@@ -1,7 +1,9 @@
 package question2;
 
 
-
+/**
+ * Classe-test Pile2Test.
+ */
 public class Pile2Test extends junit.framework.TestCase {
     private PileI p1;
     private PileI p2;

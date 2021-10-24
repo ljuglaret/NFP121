@@ -6,10 +6,7 @@ import question1.PileVideException;
 import java.util.Vector;
 
 /**
- * Décrivez votre classe PileVector ici.
- * 
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ *Classe Pile3
  */
 public class Pile3 implements PileI {
 

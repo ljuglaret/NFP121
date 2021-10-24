@@ -1,5 +1,8 @@
 package question1;
 
+/**
+ * Classe PileTest
+ */
 public class PileTest extends junit.framework.TestCase {
     // Définissez ici les variables d'instance nécessaires à vos engagements;
     // Vous pouvez également les saisir automatiquement du présentoir

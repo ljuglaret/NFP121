@@ -5,6 +5,9 @@ import question1.PileVideException;
 
 import java.util.Stack;
 
+/**
+ * Classe Pile4
+ */
 public class Pile4 implements PileI, Cloneable {
     /** la liste des Maillons/Elements */
     private Maillon stk;
@@ -44,8 +47,7 @@ public class Pile4 implements PileI, Cloneable {
     /**
      * Création d'une pile.
      * 
-     * @param taille
-     *            la taille de la pile, la taille doit être > 0
+     * @param taille . la taille de la pile, la taille doit être > 0
      */
     public Pile4(int taille) {
         if (taille <= 0){
@@ -59,11 +61,20 @@ public class Pile4 implements PileI, Cloneable {
         this.stk = null;
     }
 
+    /**
+     * Création d'une pile.
+     * 
+     * @param taille . la taille par défaut est PileI.CAPACITE_PAR_DEFAUT
+     */
     public Pile4() {
         this(PileI.CAPACITE_PAR_DEFAUT);
         this.nombre = 0;
     }
 
+    /**
+    * Place l'objet o au sommet de la pile
+    * 
+    */
     public void empiler(Object o) throws PilePleineException {
         if (estPleine())
             throw new PilePleineException();
@@ -74,7 +85,7 @@ public class Pile4 implements PileI, Cloneable {
     /**
     * Retourne le sommet de la pile et le retire de la pile
     * 
-    * @return la dernier élément de la pile
+    * @return le dernier élément de la pile
     */
     public Object depiler() throws PileVideException {
         if (estVide()){

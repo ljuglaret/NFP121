@@ -1,5 +1,8 @@
 package question1;
 
+/**
+ * Classe PolygoneRegulierTest
+ */
 public class PolygoneRegulierTest extends junit.framework.TestCase {
     private PolygoneRegulier p1;
     private PolygoneRegulier p2;

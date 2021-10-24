@@ -5,6 +5,9 @@ import question1.PileVideException;
 
 import java.util.Stack;
 
+    /** 
+    * Classe Pile2<T>
+    */
 public class Pile2<T> implements PileI<T>{
     /** par délégation : utilisation de la class Stack */
     private Stack<T> stk;
@@ -15,7 +18,7 @@ public class Pile2<T> implements PileI<T>{
      * Création d'une pile.
      * 
      * @param taille
-     *            la taille de la pile, la taille doit être > 0
+     * la taille de la pile, la taille doit être > 0
      */
     public Pile2(int taille) {
         if(taille <= 0){
@@ -39,6 +42,10 @@ public class Pile2<T> implements PileI<T>{
         return stk.peek();
     }
 
+    /**
+     * Place o au sommet de la pile
+     * @param o
+    */
     public void empiler(T  o) throws PilePleineException {
         if(estPleine()){
             throw new PilePleineException();

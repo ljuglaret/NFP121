@@ -1,5 +1,8 @@
 package question1;
 
+/**
+ * Classe PolygoneRegulier
+ */
 public class PolygoneRegulier {
 
     private int nombreDeCotes;

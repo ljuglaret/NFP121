@@ -5,6 +5,10 @@ import question1.PileVideException;
 
 import java.util.Stack;
 
+/**
+ * Classe Pile2
+ */
+
 public class Pile2 implements PileI {
     /** par délégation : utilisation de la class Stack */
     private Stack<Object> stk;
@@ -15,8 +19,8 @@ public class Pile2 implements PileI {
     /**
      * Création d'une pile.
      * 
-     * @param taille
-     *            la taille de la pile, la taille doit être > 0
+     * @param taille. 
+     * La taille de la pile, la taille doit être > 0
      */
     public Pile2(int taille) {
 
@@ -34,6 +38,10 @@ public class Pile2 implements PileI {
         this(PileI.CAPACITE_PAR_DEFAUT );
     }
 
+    /**
+     * Place o au sommet de la pile.
+     * @param o
+     */
     public void empiler(Object o) throws PilePleineException {
         if(estPleine()){
             throw new PilePleineException();
@@ -87,7 +95,7 @@ public class Pile2 implements PileI {
      * Retourne une représentation en String d'une pile, contenant la
      * représentation en String de chaque élément.
      * 
-     * @return une représentation en String d'une pile
+     * @return une représentation en String de la pile
      */
     public String toString() {
         String s = "[";
@@ -100,6 +108,15 @@ public class Pile2 implements PileI {
         return s+ "]";
     }
 
+    /**
+     * Teste l'égalité entre un objet de type Pile2 et un objet
+     * 
+     * @return vrai si les objets sont de la même instance,
+     * ont la même capacité,
+     * la même taille,
+     * et que tous leurs éléments ont le même type et la même valeur.
+     * @param o
+     */
     public boolean equals(Object o) {
         boolean egalite = true;
         if (o instanceof Pile2) {
@@ -155,4 +172,4 @@ public class Pile2 implements PileI {
         }
     }
 
-} // Pile2.java
+} 

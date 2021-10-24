@@ -4,10 +4,7 @@ import question1.PilePleineException;
 import question1.PileVideException;
 
 /**
- * A remplacer en partie par votre classe Pile de la question 1.
- * 
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * Classe Pile
  */
 public class Pile implements PileI {
 
@@ -18,7 +15,7 @@ public class Pile implements PileI {
      * Création d'une pile.
      * 
      * @param taille
-     *            la taille de la pile, la taille doit être > 0
+     *  la taille de la pile, la taille doit être > 0
      */
     public Pile(int taille) {
         if (taille < 0){
@@ -36,6 +33,10 @@ public class Pile implements PileI {
         this.ptr = 0;
     }
 
+    /**
+     * Place o au sommet de la pile.
+     * @param o
+     */
     public void empiler(Object o) throws PilePleineException {
         if (estPleine())
             throw new PilePleineException();
