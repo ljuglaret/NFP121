@@ -24,10 +24,10 @@ package question2;
  *          engagements, et suivi d'un appel à tearDown(), qui les détruit.
  */
 public class Pile4Test extends junit.framework.TestCase {
-        private PileI p1;
+    private PileI p1;
     private PileI p2;
     private PileI p3;
-    
+
     public void setUp() {
         p1 = new question2.Pile4();
         p2 = new question2.Pile4();
@@ -69,7 +69,7 @@ public class Pile4Test extends junit.framework.TestCase {
     }
 
     public void test_Pile4_estVide() throws Exception {
-        PileI p = new question2.Pile(3);
+        PileI p = new question2.Pile4(3);
         assertEquals(true, p.estVide());
         try {
             Object r = p.depiler();
@@ -92,14 +92,13 @@ public class Pile4Test extends junit.framework.TestCase {
     }
 
     public void test_Pile4_TailleNegative() {
-        PileI p = new question2.Pile(-3);
+        PileI p = new question2.Pile4(-3);
         assertEquals(p.CAPACITE_PAR_DEFAUT, p.capacite());
 
     }
 
     public void test_Pile4_equals() throws Exception {
 
-    try{
         p1.empiler(3);
         p1.empiler(2);
         p1.empiler(1);
@@ -108,16 +107,42 @@ public class Pile4Test extends junit.framework.TestCase {
         p2.empiler(2);
         p2.empiler(1);
 
-        assertTrue("égalité de deux piles 1)? " +p1.toString()  + " - " +p2.toString(), p1.equals(p2));
-        assertTrue("égalité de deux piles 2)? " +p1.toString()  + " - " +p2.toString(), p2.equals(p1));
-        assertTrue("égalité de deux piles 3)? " +p1.toString()  + " - " +p2.toString(), p1.equals(p1));
+        assertTrue("égalité de deux piles ? ", p1.equals(p2));
+        assertTrue("égalité de deux piles ? ", p2.equals(p1));
+        assertTrue("égalité de deux piles ? ", p1.equals(p1));
 
         p2.empiler(1);
-        assertFalse("égalité de deux piles 4)? " +p1.toString()  + " - " +p2.toString(), p1.equals(p2));
+        assertFalse("égalité de deux piles ? ", p1.equals(p2));
+
     }
-    catch(Exception e){
-        System.out.println(e);
+
+    public void test_Pile4_hashCodeErreur() throws Exception {
+        try{
+            p1.empiler(4);
+
+            assertFalse("égalité hashcode " +p1.toString()  + " - " +p2.toString(), (p1.hashCode())==(p2.hashCode()));
+            assertFalse("égalité de deux piles ? " +p1.toString()  + " - " +p2.toString(), p1.equals(p2));
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+
     }
+
+    public void test_Pile4_equals_hashCode(){
+        try{
+            PileI ptest0 = new question2.Pile4(1);
+            ptest0.empiler(1);
+            
+            PileI ptest1 = new question2.Pile4(1);
+            ptest1.empiler("1");
+            
+            assertTrue("égalité hashcode " +ptest0.toString()  + " - " +ptest1.toString(), (ptest0.hashCode())==(ptest1.hashCode()));
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
 
     }
 }
+ 

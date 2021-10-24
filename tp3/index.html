@@ -56,19 +56,19 @@
         <tr>
             <td>Nom
             </td>
-            <td>...
+            <td>Juglaret
             </td>
         </tr>
         <tr>
-            <td>Prénom
+            <td>PrÃ©nom
             </td>
-            <td>...
+            <td>Laure
             </td>
         </tr>
         <tr>
             <td>Matricule
             </td>
-            <td>...
+            <td>0G5DRL8UNZ3
             </td>
         </tr>
     </table>
@@ -76,56 +76,92 @@
 	<br />
     <hr />
     <h3>Question 1.1</h3>
-    Votre réponse...
+    Votre rï¿½ponse...
 
     <br />
     <hr />
     <h3>Question 1.2</h3>
-    Votre réponse...
+    Votre rï¿½ponse...
 
     <br />
     <hr />
     <h3>Question 2.1</h3>
-    Votre réponse...
+    Votre rï¿½ponse...
 
     <br />
     <hr />
     <h3>Question 2.2</h3>
-    Votre réponse...
+    Votre rï¿½ponse...
 
     <br />
     <hr />
     <h3>Question 2.3</h3>
-    Votre réponse...
+    Votre rï¿½ponse...
 
     <br />
     <hr />
     <h3>Question 2.4</h3>
-    Votre réponse...
+    Votre rï¿½ponse...
 
     <br />
     <hr />
     <h3>Question 2.5</h3>
-    Votre réponse...
+    <pre>
+        <code>
+            public boolean equals(Object o) {
+                if (o instanceof PileI) {
+                  PileI p = (PileI) o;
+                  return this.capacite() == p.capacite()
+                      && this.hashCode() == p.hashCode();
+                } else
+                  return false;
+                }
+        </code>
+    </pre>
+    
+        Cette rÃ©ponse ne permet pas de tester le type de l'objet et renvoie donc vrai au test ("1","2","3") == (1,2,3)
+        
+        Deux piles sont Ã©gales si elles ont : mÃªme taille, mÃªme capacitÃ©, mÃªmes Ã©lÃ©ments (valeur et type).
+     
+        Cette autre rÃ©ponse, Ã©lÃ©gante, n'est pas correcte
+    
+        <pre>
+            <code>
+        public boolean equals(Object o) {
+            return this.toString().equals(o.toString());
+        }
+        </pre>
+    </code>
+        
+        L'Ã©galitÃ© est ici testÃ©e sur ce qui s'affiche Ã  l'Ã©cran. Il manque les vÃ©rifications sur :
+        <li>
+            la capacitÃ©
+        </li>
+        <li>
+            la taille
+        </li>
+        <li>
+            le type
+        </li>
 
     <br />
     <hr />
     <h3>Question 3.1</h3>
-    Votre réponse...
+    Votre rï¿½ponse...
 
     <br />
     <hr />
     <h3>Question 3.2</h3>
-    Votre réponse...
+    Votre rï¿½ponse...
 
     <br />
     <hr />
     <h3>Question 3.3</h3>
-    Votre réponse...
+    Votre rï¿½ponse...
 	
     <br />
     <hr />    
         <h3>Conclusion, biliographie et remarques :</h3>
-        <i style="font-size:12px;">... Une seule page html, limitez le nombre de clics, (plus de 200 rapports à corriger chaque semaine)</i>
+        <i style="font-size:12px;">... Une seule page html, limitez le nombre de clics, (plus de 200 rapports ï¿½ corriger chaque semaine)</i>
 </body>
 </html>

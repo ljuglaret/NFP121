@@ -12,6 +12,27 @@ public class UneUtilisation {
         // p1 est ici une pile de polygones réguliers PolygoneRegulier.java
         p1.empiler(new PolygoneRegulier(4, 100));
         p1.empiler(new PolygoneRegulier(5, 100));
+        PileI p3= new Pile2(6);
+        p3.empiler(new PolygoneRegulier(5, 200));
+        p3.empiler(new PolygoneRegulier(8, 150));
+        p3.empiler(new PolygoneRegulier(9, 150));
+        p3.empiler(new PolygoneRegulier(10, 150));
+        p3.empiler(new PolygoneRegulier(11, 150));
+        p3.empiler(new PolygoneRegulier(12, 150));
+        p3.empiler(new PolygoneRegulier(13, 150));
+        p3.empiler(new PolygoneRegulier(14, 150));
+        p3.empiler(new PolygoneRegulier(15, 150));
+        
+        p3.depiler();
+        p3.depiler();
+        p3.depiler();
+        p3.depiler();
+        p3.depiler();
+        p3.depiler();
+
+        PileI p4= new Pile2(6);
+        p4.empiler(new PolygoneRegulier(7, 150));
+
 
         System.out.println(" la pile p1 = " + p1);
 

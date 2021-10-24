@@ -7,4 +7,13 @@ package question1;
  * @version (un numéro de version ou une date)
  */
 public class PileVideException extends Exception {
+    public  PileVideException() {
+    super();
+  }
+
+  public  PileVideException(String s) {
+    super(s);
+  }
+
 }
+

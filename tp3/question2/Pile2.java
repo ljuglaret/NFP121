@@ -19,10 +19,9 @@ public class Pile2 implements PileI {
      *            la taille de la pile, la taille doit être > 0
      */
     public Pile2(int taille) {
-        
-        if (taille < 0){
+
+        if (taille <= 0){
             this.capacite = PileI.CAPACITE_PAR_DEFAUT ;
-            throw new NumberFormatException("la taille ne peut pas être négative");
         }
         else{
             stk = new Stack<Object>();
@@ -31,9 +30,8 @@ public class Pile2 implements PileI {
     }
 
     // constructeur fourni
-    public Pile2() {
-
-        this(0);
+    public Pile2() {    
+        this(PileI.CAPACITE_PAR_DEFAUT );
     }
 
     public void empiler(Object o) throws PilePleineException {
@@ -43,6 +41,11 @@ public class Pile2 implements PileI {
         stk.push(o);
     }
 
+    /**
+     * Retourne le sommet de la pile et le retire de la pile
+     * 
+     * @return la dernier élément de la pile
+     */
     public Object depiler() throws PileVideException {
         if(estVide()){
             throw new PileVideException();
@@ -50,6 +53,11 @@ public class Pile2 implements PileI {
         return stk.pop();
     }
 
+    /**
+     * Retourne le sommet de la pile
+     * 
+     * @return la dernier élément de la pile
+     */
     public Object sommet() throws PileVideException {
         if(estVide()){
             throw new PileVideException();
@@ -92,16 +100,31 @@ public class Pile2 implements PileI {
         return s+ "]";
     }
 
-
     public boolean equals(Object o) {
-        if (o instanceof PileI) {
-              PileI p = (PileI) o;
-              return this.capacite() == p.capacite()
-                  && this.hashCode() == p.hashCode();
+        boolean egalite = true;
+        if (o instanceof Pile2) {
+            try{
+                Pile2 p = (Pile2) o;
+                if (p.taille() == this.taille() && p.capacite() == this.capacite()){
+                    for(int i = 0; i < p.taille() ; i++){
+                        if(!(stk.get(i).equals(p.stk.get(i)))){
+                            egalite = false;
+                            break;
+                        }
+                    }
+                }
+                else{
+                    egalite = false;
+                }
+            }
+            catch (Exception e){
+                egalite = false;
+            }
         }
         else{
-            return false;
+            egalite = false;
         }
+        return egalite;
     }
     // fonction fournie
     public int hashCode() {
@@ -118,9 +141,9 @@ public class Pile2 implements PileI {
     }
 
     /**
-     * Retourne la capacité de cette pile.
+     * Retourne la capacité de la pile
      * 
-     * @return le nombre d'élément
+     * @return le nombre d'éléments que la pile peut contenir
      */
     public int capacite() {
         if(capacite < 0){

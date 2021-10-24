@@ -30,7 +30,12 @@ public class Pile2<T> implements PileI<T>{
         this(0);
     }
     
-        public T sommet() throws PileVideException {
+    /**
+    * Retourne le sommet de la pile
+    * 
+    * @return la dernier élément de la pile
+    */
+    public T sommet() throws PileVideException {
         return stk.peek();
     }
 
@@ -41,6 +46,11 @@ public class Pile2<T> implements PileI<T>{
         stk.push(o);
     }
 
+    /**
+    * Retourne le sommet de la pile et le retire de la pile
+    * 
+    * @return la dernier élément de la pile
+    */
     public T depiler() throws PileVideException {
         if(estVide()){
             throw new PileVideException();
@@ -80,9 +90,18 @@ public class Pile2<T> implements PileI<T>{
         return s+ "]";
     }
 
-
+    /**
+     * Effectue un test d'égalité entre l'objet courant et un Object
+     * 
+     * @return vrai si la capacité et le hashCode sont égaux
+     */
     public boolean equals(Object o) {
-       return stk.equals(o);
+        if(o instanceof Pile2){
+            return stk.equals((Pile2)o);
+        }
+        else {
+            return false;
+        }
     }
     // fonction fournie
     public int hashCode() {
@@ -107,9 +126,4 @@ public class Pile2<T> implements PileI<T>{
         return stk.capacity();
     }
 
-
-    // recopier ici toutes les autres méthodes
-    // qui ne sont pas modifiées en fonction
-    // du type des éléments de la pile
-
-} // Pile2
+} 

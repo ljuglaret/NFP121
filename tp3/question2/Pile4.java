@@ -48,14 +48,20 @@ public class Pile4 implements PileI, Cloneable {
      *            la taille de la pile, la taille doit être > 0
      */
     public Pile4(int taille) {
-        if (taille <= 0)
-            taille = CAPACITE_PAR_DEFAUT;
+        if (taille <= 0){
+            //this.stk = null;
+            this.capacite  = this.CAPACITE_PAR_DEFAUT;
+        }
+        else{
+            //this.stk = null;
+            this.capacite = taille;
+        }
         this.stk = null;
-        this.capacite = taille;
     }
 
     public Pile4() {
         this(PileI.CAPACITE_PAR_DEFAUT);
+        this.nombre = 0;
     }
 
     public void empiler(Object o) throws PilePleineException {
@@ -65,35 +71,26 @@ public class Pile4 implements PileI, Cloneable {
         this.stk = new Maillon(o,this.stk);
     }
 
+    /**
+    * Retourne le sommet de la pile et le retire de la pile
+    * 
+    * @return la dernier élément de la pile
+    */
     public Object depiler() throws PileVideException {
         if (estVide()){
             throw new PileVideException();
         }
-        
         Object dernier =  stk.element;
         stk = stk.suivant();
         nombre--;
-        return dernier;
-        
-}
+        return dernier;  
+    }
 
-public void depiler2() throws PileVideException {
-        if (estVide()){
-            throw new PileVideException();
-        }
-        
-       
-        Maillon temp1 , temp2;
-        Maillon lastElement = null;
-        int x;
-        int index = 0 ;
-        stk = stk.suivant();
-        nombre--;
-       
-        
-}
-
-
+    /**
+    * Retourne le sommet de la pile
+    * 
+    * @return la dernier élément de la pile
+    */
     public Object sommet() throws PileVideException {
         if (estVide())
             throw new PileVideException();
@@ -126,28 +123,61 @@ public void depiler2() throws PileVideException {
      */
     public String toString() {
         String s = "[";
-        Maillon temp;
-        int x;
-        temp = stk;
-        for(x=0; x<nombre ; x++) {
-            s+=temp.element();
-            if(x < nombre - 1 ){
-               s+=", ";
-            }
-            temp = temp.suivant();
-        }
-        return s + "]";
+        Maillon tmp = stk;
+        while (tmp != null){
+            s = s + tmp.element() ;
+            tmp = tmp.suivant();
+            if (tmp !=null) {
+                s = s + ", ";
+            }  
+        }  
+        return s + "]"; 
     }
 
+    /**
+     * Effectue un test d'égalité entre l'objet courant et un Object
+     * 
+     * @return vrai si la capacité et le hashCode sont égaux
+     */
     public boolean equals(Object o) {
+        boolean egalite = true;
         if (o instanceof Pile4) {
-            PileI p = (PileI) o;
-            return this.capacite() == p.capacite()
-                  && this.hashCode() == p.hashCode();
+            Pile4 p = (Pile4) o;
+              Maillon m1;
+            Maillon m2;
+           try{
+                if (p.taille() == this.taille() && p.capacite() == this.capacite()){
+                    m1 = stk;
+                    m2 = p.stk;
+                    for(int i = 0; i < nombre ; i++){
+                        if(!(m1.element()==(m2.element()))){
+                            egalite = false;
+                            break;
+                        }
+                        else{
+                            m1 = m1.suivant();
+                            m2 = m2.suivant();
+                        }       
+                    }
+                }
+                else{
+                    egalite = false;
+                }
+            }
+            catch (Exception e){
+               egalite = false;
+            }
+       }
+        else{
+            egalite = false;
         }
-        return false;
-    }
-
+        return egalite;
+      }
+    /**
+    * Retourne la capacité de la pile
+    * 
+    * @return le nombre d'éléments que la pile peut contenir
+    */
     public int capacite() {
         return this.capacite;
     }
@@ -155,7 +185,12 @@ public void depiler2() throws PileVideException {
     public int hashCode() {
         return toString().hashCode();
     }
-
+    
+    /**
+    * Retourne la taille de la pile
+    * 
+    * @return le nombre d'éléments que la pile contient
+    */
     public int taille() {
         return nombre;
     }

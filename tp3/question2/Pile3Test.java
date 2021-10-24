@@ -35,8 +35,7 @@ public class Pile3Test extends junit.framework.TestCase {
     }
 
     public void test_Pile3_capacite() {
-        assertEquals(0, p3.capacite());
-        //assertEquals(3, p1.capacite());
+         assertEquals(6, p3.capacite());
     }
 
     public void test_Pile3_estPleine() throws Exception {
@@ -93,7 +92,7 @@ public class Pile3Test extends junit.framework.TestCase {
     }
 
     public void test_Pile3_TailleNegative() {
-        PileI p = new question2.Pile(-3);
+        PileI p = new question2.Pile3(-3);
         assertEquals(p.CAPACITE_PAR_DEFAUT, p.capacite());
 
     }
@@ -115,6 +114,25 @@ public class Pile3Test extends junit.framework.TestCase {
 
         p2.empiler(1);
         assertFalse("égalité de deux piles 4)? " +p1.toString()  + " - " +p2.toString(), p1.equals(p2));
+    }
+    catch(Exception e){
+        System.out.println(e);
+    }
+
+    }
+    
+    
+    public void test_Pile3_equalsException() throws Exception {
+
+    try{
+        p1.empiler(3);
+        p1.empiler(2);
+        p1.empiler(1);
+
+        
+        assertFalse("égalité de deux piles 1)? " +p1.toString()  + " - " +p2.toString(), p1.equals(p2));
+        assertFalse("égalité de deux piles 2)? " +p1.toString()  + " - " +p2.toString(), p2.equals(p1));
+        assertTrue("égalité de deux piles 3)? " +p1.toString()  + " - " +p2.toString(), p1.equals(p1));
     }
     catch(Exception e){
         System.out.println(e);
