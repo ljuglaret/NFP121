@@ -5,24 +5,48 @@
  * @Laure Juglaret @v1.0.0
  */
 import java.lang.Integer;
+import java.util.Observable;
+import java.util.ArrayList;
 
-public class Entier {
+public class Entier  extends Observable{
     // variable d'instance
     private int entier;
+    ObservateurEntier obs = new ObservateurEntier();
+   // ObservateurEntier obsInc = new ObservateurEntier();
+   // ObservateurEntier obsDec = new ObservateurEntier();
+    
+              
 
     /**
      * Constructeur d'objets de classe Entier
      */
     public Entier(int entier) {
+
         this.entier = entier;
+        this.addObserver(obs);
+        //this.addObserver(obsInc);
+        // this.addObserver(obsDec);
+       
     }
+    
 
     public void inc() {
-        this.entier++;
+       try{
+            this.entier++;
+            this.setChanged();
+            this.notifyObservers(this.entier);
+        }
+        catch(NumberFormatException e){}
+         
+       
     }
 
     public void dec() {
-        this.entier--;
+      
+            this.entier--;
+            this.setChanged();
+            this.notifyObservers(this.entier);
+        
     }
 
     public int getEntier() {
@@ -36,6 +60,9 @@ public class Entier {
 
     public void setEntier(int newEntier) {
         this.entier = newEntier;
+        this.setChanged();
+            this.notifyObservers(this.entier);
+       
     }
 
     /*

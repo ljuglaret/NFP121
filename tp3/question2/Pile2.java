@@ -119,6 +119,11 @@ public class Pile2 implements PileI {
      */
     public boolean equals(Object o) {
         boolean egalite = true;
+         //il faut vérifier que pour toute Pile pile : pile == pile
+        if (this == o){
+            return egalite;
+        }
+        
         if (o instanceof Pile2) {
             try{
                 Pile2 p = (Pile2) o;

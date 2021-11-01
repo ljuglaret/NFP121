@@ -5,8 +5,8 @@ package question1;
 public class UneUtilisation {
 
     public static void main(String[] args) throws Exception {
-        Pile p1 = new Pile(6);
-        Pile p2 = new Pile(10);
+        Pile0 p1 = new Pile0(6);
+        Pile0 p2 = new Pile0(10);
         //p1 est ici une pile de polygones réguliers PolygoneRegulier.java
 
         p1.empiler(new PolygoneRegulier(5, 100));

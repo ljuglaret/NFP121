@@ -2,127 +2,129 @@ package question2;
 
 import question1.PilePleineException;
 import question1.PileVideException;
+import question1.Pile0;
+
 
 /**
  * Classe Pile
  */
-public class Pile implements PileI {
-
-    private Object[] zone;
-    private int ptr;
+public class Pile implements PileI {  
+    
+    private Pile0 pile;
+    
+    public Pile() {
+         this(0);
+    }
 
     /**
-     * Création d'une pile.
+     * Creation d'une pile.
      * 
      * @param taille
-     *  la taille de la pile, la taille doit être > 0
+     *            la taille de la pile, la taille doit ï¿½tre > 0
      */
     public Pile(int taille) {
-        if (taille < 0){
-            this.zone = new Object[this.CAPACITE_PAR_DEFAUT] ;
+        if (taille <= 0){
+            this.pile = new Pile0(PileI.CAPACITE_PAR_DEFAUT );
         }
         else{
-            this.zone = new Object[taille];
+            this.pile = new Pile0(taille);
         }
-        this.ptr = 0;
-
     }
 
-    public Pile() {
-        this.zone = new Object[this.CAPACITE_PAR_DEFAUT];
-        this.ptr = 0;
-    }
-
-    /**
-     * Place o au sommet de la pile.
-     * @param o
-     */
     public void empiler(Object o) throws PilePleineException {
-        if (estPleine())
-            throw new PilePleineException();
-        this.zone[this.ptr] = o;
-        this.ptr++;
+        pile.empiler(o);
     }
 
     /**
      * Retourne le sommet de la pile et le retire de la pile
      * 
-     * @return la dernier élément de la pile
+     * @return la dernier ï¿½lï¿½ment de la pile
      */
     public Object depiler() throws PileVideException {
-        if (estVide())
-            throw new PileVideException();
-        this.ptr--;
-        return zone[ptr];
+       return pile.depiler();
     }
 
     /**
      * Retourne le sommet de la pile
      * 
-     * @return la dernier élément de la pile
+     * @return la dernier ï¿½lï¿½ment de la pile
      */
     public Object sommet() throws PileVideException {
-        if (estVide()){
-            throw new PileVideException();
-        }
-        return zone[this.ptr - 1];
-    }
-
-    /**
-     * Retourne la capacité de la pile
-     * 
-     * @return le nombre d'éléments que la pile peut contenir
-     */
-    public int capacite() {
-        if (ptr <= 0)
-            return this.CAPACITE_PAR_DEFAUT ;
-        else 
-            return zone.length ;
+       
+        return pile.sommet();
     }
 
     /**
      * Retourne la taille de la pile
      * 
-     * @return le nombre d'éléments que la pile contient
+     * @return le nombre d'ï¿½lï¿½ments que la pile contient
      */
     public int taille() {
-        return ptr;
+        return pile.taille();
     }
 
     /**
-     * Effectue un test de l'état de la pile.
+     * Retourne la capacitï¿½ de la pile
+     * 
+     * @return le nombre d'ï¿½lï¿½ments que la pile peut contenir
+     */
+    public int capacite() {
+        return pile.capacite();
+    }
+
+    /**
+     * Effectue un test de l'ï¿½tat de la pile.
      * 
      * @return vrai si la pile est vide, faux autrement
      */
     public boolean estVide() {
-        return ptr == 0;
+        return pile.estVide();
     }
 
     /**
-     * Effectue un test de l'état de la pile.
+     * Effectue un test de l'ï¿½tat de la pile.
      * 
      * @return vrai si la pile est pleine, faux autrement
      */
     public boolean estPleine() {
-        return ptr == zone.length;
+        return capacite() == taille();
+    }
+
+    public String toString() {
+       return pile.toString();
     }
 
     /**
-     * Effectue un test d'égalité entre l'objet courant et un Object
+     * Effectue un test d'egalite entre l'objet courant et un Object
      * 
-     * @return vrai si la capacité et le hashCode sont égaux
+     * @return vrai si les objets sont égaux
      */
     public boolean equals(Object o) {
+       
         boolean egalite = true;
+        
+        //il faut vérifier que pour toute Pile pile : pile == pile
+        if (this == o){
+            return egalite;
+        }
         if (o instanceof Pile) {
-            try{
-                Pile p = (Pile) o;
+          
+           try{
+                 Pile p = (Pile) o;
+                Object sommet1;
+                Object sommet2;
                 if (p.taille() == this.taille() && p.capacite() == this.capacite()){
+                    sommet1 = this.sommet();
+                    sommet2 = p.sommet();
                     for(int i = 0; i < p.taille() ; i++){
-                        if(!(zone[i].equals(p.zone[i]))){
+                        if(!(sommet1 ==sommet2)){
                             egalite = false;
                             break;
                         }
+                        else{
+                           this.depiler();
+                           p.depiler();
+                        }       
                     }
                 }
                 else{
@@ -130,34 +132,20 @@ public class Pile implements PileI {
                 }
             }
             catch (Exception e){
-                egalite = false;
+               egalite = false;
             }
-        }
+       }
         else{
             egalite = false;
         }
         return egalite;
-    }
+
+        
+      }
 
     // fonction fournie
     public int hashCode() {
         return toString().hashCode();
     }
 
-    /**
-     * Retourne une représentation en String d'une pile, contenant la
-     * représentation en String de chaque élément.
-     * 
-     * @return une représentation en String d'une pile
-     */
-    public String toString() {
-        StringBuffer sb = new StringBuffer("[");
-        for (int i = ptr - 1; i >= 0; i--) {
-            sb.append(String.valueOf(zone[i]));
-            if (i > 0)
-                sb.append(", ");
-        }
-        sb.append("]");
-        return sb.toString();
-    }
 }

@@ -152,6 +152,11 @@ public class Pile4 implements PileI, Cloneable {
      */
     public boolean equals(Object o) {
         boolean egalite = true;
+         //il faut vérifier que pour toute Pile pile : pile == pile
+        if (this == o){
+            return egalite;
+        }
+        
         if (o instanceof Pile4) {
             Pile4 p = (Pile4) o;
               Maillon m1;

@@ -50,7 +50,7 @@ public class Pile3Test extends junit.framework.TestCase {
     }
 
     public void test_Pile3_estVide() throws Exception {
-        PileI p = new question2.Pile(3);
+        PileI p = new question2.Pile3(3);
         assertEquals(true, p.estVide());
         try {
             Object r = p.depiler();

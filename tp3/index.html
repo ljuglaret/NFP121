@@ -87,7 +87,7 @@
         sinon  initialise une pile vide d'une capacité égale à la capacité par défaut.
     </p>
    
-    <p><a href = "https://github.com/ljuglaret/NFP121/blob/gh-pages/tp3/question1/Pile.java" >Source</a></p>
+    <p><a href = "https://github.com/ljuglaret/NFP121/blob/gh-pages/tp3/question1/Pile0.java" >Source</a></p>
     <h4>Classe IHM</h4>
     
      <p>
@@ -104,35 +104,32 @@
     <br />
     <hr />
     <h3>Question 1.2</h3>
-    <pre>
-        <code>
-            public static void main(String[] args) throws Exception {
-                Pile p1 = new Pile(6);
-                Pile p2 = new Pile(10);
-                //p1 est ici une pile de polygones réguliers PolygoneRegulier.java
-        
-                p1.empiler(new PolygoneRegulier(5, 100));
-                p1.empiler("polygone");
-                p1.empiler(new Integer(100));
-                System.out.println(" la pile p1 = " + p1); // Quel est le résultat ? (1)
-        
-                p2.empiler(new Integer(1000));
-                p1.empiler(p2);
-                System.out.println(" la pile p1 = " + p1); // Quel est le résultat ? (2)
-        
-                try {
-                    p1.empiler(new PolygoneRegulier(4,100));
-                   
-                   String s = (String) p1.depiler(); // vérifiez qu'une exception se
-                                                        // produit (3)
-                p1.depiler();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } 
-            } 
-        </code>
 
-    </pre>
+            <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> main(String[] args) <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception <span style='font-weight:bold;color:#D3171B'>{</span>
+                Pile p1 = <span style='font-weight:bold;color:#7B0052;'>new</span> Pile(6);
+                Pile p2 = <span style='font-weight:bold;color:#7B0052;'>new</span> Pile(10);
+                <span style='color:#3F7F5F'>//p1 est ici une pile de polygones réguliers PolygoneRegulier.java
+</span>        
+                p1.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(5, 100));
+                p1.empiler(<span style='color:#2A00FF'>"polygone"</span>);
+                p1.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> Integer(100));
+                System.out.println(<span style='color:#2A00FF'>" la pile p1 = "</span> + p1); <span style='color:#3F7F5F'>// Quel est le résultat ? (1)
+</span>        
+                p2.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> Integer(1000));
+                p1.empiler(p2);
+                System.out.println(<span style='color:#2A00FF'>" la pile p1 = "</span> + p1); <span style='color:#3F7F5F'>// Quel est le résultat ? (2)
+</span>        
+                <span style='font-weight:bold;color:#7B0052;'>try</span> <span style='font-weight:bold;color:#D3171B'>{</span>
+                    p1.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(4,100));
+                   
+                   String s = (String) p1.depiler(); <span style='color:#3F7F5F'>// vérifiez qu'une exception se
+</span>                                                        <span style='color:#3F7F5F'>// produit (3)
+</span>                p1.depiler();
+                <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>catch</span> (Exception e) <span style='font-weight:bold;color:#D3171B'>{</span>
+                    e.printStackTrace();
+                <span style='font-weight:bold;color:#D3171B'>}</span> 
+            <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
         <p>
             (1) :  la pile p1 = [100, polygone, <5,100>]
         </p>
@@ -153,7 +150,9 @@
     <hr />
     <h3>Question 2.1 : Modifiez la classe Pile pour qu'elle implémente maintenant l'interface PileI</h3>
     <h4>Classe Pile</h4>
-    <a href = https://github.com/ljuglaret/NFP121/blob/gh-pages/tp3/question2/PileI.java" >Source</a>
+    <a href = "https://github.com/ljuglaret/NFP121/blob/gh-pages/tp3/question1/Pile0.java" >Source</a>
+
+    Changements par rapport à sa version précédente : ajout du mot clef implements, et définitions des nouvelles méthodes : equals, sommet, taille, capacite, hashCode (fournit).
 
 
     <br />
@@ -194,7 +193,12 @@
     <br />
     <hr />
     <h3>Question 2.3</h3>
-    Votre r�ponse...
+   
+   <li> <a href = "https://github.com/ljuglaret/NFP121/blob/gh-pages/tp3/question2/PileTest.java" >Tests Pile</a></li>
+   <li>  <a href = "https://github.com/ljuglaret/NFP121/blob/gh-pages/tp3/question2/Pile2Test.java" >Tests Pile2</a></li>
+   <li> <a href = "https://github.com/ljuglaret/NFP121/blob/gh-pages/tp3/question2/Pile3Test.java" >Tests Pile3</a></li>
+   <li>  <a href = "https://github.com/ljuglaret/NFP121/blob/gh-pages/tp3/question2/Pile4Test.java" >Tests Pile4</a></li>
+
 
     <br />
     <hr />
@@ -204,34 +208,38 @@
     <br />
     <hr />
     <h3>Question 2.5</h3>
-    <pre>
-        <code>
-            public boolean equals(Object o) {
-                if (o instanceof PileI) {
-                  PileI p = (PileI) o;
-                  return this.capacite() == p.capacite()
-                      && this.hashCode() == p.hashCode();
-                } else
-                  return false;
-                }
-        </code>
-    </pre>
+
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> equals(Object o) <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (o <span style='font-weight:bold;color:#7B0052;'>instanceof</span> PileI) <span style='font-weight:bold;color:#D3171B'>{</span>
+          PileI p = (PileI) o;
+          <span style='font-weight:bold;color:#7B0052;'>return</span> this.capacite() == p.capacite()
+              && this.hashCode() == p.hashCode();
+        <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>else</span>
+          <span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>false</span>;
+        <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+ 
     
-        Cette réponse ne permet pas de tester le type de l'objet et renvoie donc vrai au test ("1","2","3") == (1,2,3)
-        
-        Deux piles sont égales si elles ont : même taille, même capacité, mêmes éléments (valeur et type).
-     
-        Cette autre réponse, élégante, n'est pas correcte
-    
-        <pre>
-            <code>
-        public boolean equals(Object o) {
-            return this.toString().equals(o.toString());
-        }
-        </pre>
-    </code>
-        
-        L'égalité est ici testée sur ce qui s'affiche à l'écran. Il manque les vérifications sur :
+        <p>
+            La méthode hashCode() telle que définie dans les classes Pile Pile2 Pile3 et Pile4 de la question 2 convertit chaque objet en String puis appelle
+            la métode de Hash de la classe String, donc elle renvoie vrai au test ("1","2","3") == (1,2,3).
+        </p>
+        <p>
+            De plus, si deux objets sont les mêmes alors leur hash sont égaux, mais l'égalité entre deux hash n'implique pas l'égalité entre objets.
+            
+            </p>
+        <p>
+            Enfin,  le critère de capacité n'est pas suffisant.
+            <br> Soit par exemple p1(5) et p2(5) deux piles de capacité 5 telles que p1 = ("1 ","2") et p2 = ("1"," ", "2").
+            <br>Les égalités p1.capacite() == p2.capacite() et p1.hashCode() == p2.hashCode(); sont bien vérifiées mais les piles ne sont pas égales.
+        </p>  
+           
+        <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> equals(Object o) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>return</span> this.toString().equals(o.toString());
+        <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+        Cette autre réponse, élégante, n'est pas correcte car l'égalité concerne juste l'affichage des valeurs.
+        <br>
+         Il manque les vérifications sur :
         <li>
             la capacité
         </li>
@@ -245,39 +253,60 @@
     <br />
     <hr />
     <h3>Question 3.1 : Généricité : un premier usage</h3>
-    Votre r�ponse...
 
     <br />
     <hr />
     <h3>Question 3.2 : La classe UneUtilisation</h3>
-    <pre>
-        <code>
-            public static void main(String[] args) throws Exception {
-                Pile p1 = new Pile(6);
-                Pile p2 = new Pile(10);
-                // p1 est ici une pile de polygones réguliers PolygoneRegulier.java,
-                // entre autres
-                p1.empiler(new PolygoneRegulier(4, 100));
-                p1.empiler(new PolygoneRegulier(5, 100));
-                p1.empiler("polygone");
-                p1.empiler(new Integer(100));
-                System.out.println(" la pile p1 = " + p1);
-            
-                p2.empiler(new Integer(1000));
-                p1.empiler(p2);
-                System.out.println(" la p1 = " + p1);
-            
-                try {
-                  p1.empiler(new PolygoneRegulier(4, 100));
-                  String s = (String) p1.depiler(); // vérifiez qu'une exception est levée à l'exécution (1)
-                } catch (Exception e) {
-                  e.printStackTrace();
-                }
-              }
-        </code>
-    </pre>
-    <p>Dans ce contexte, p1 est une pile de polygones réguliers.
-        <br> Donc l'instruction p1.depiler() retourne un Polygone Regulier, lequel ne peut pas être casté en String, ce qui déclenchera une erreur au runtime.
+   
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> main(String[] args) <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='color:#3F7F5F'>// declaration de p1 et initialisation (p1 est ici une pile de polygones réguliers PolygoneRegulier.java)
+</span>        PileI&lt;PolygoneRegulier&gt; p1 = <span style='font-weight:bold;color:#7B0052;'>new</span> Pile2(7);
+        <span style='color:#3F7F5F'>// declaration de p1 et initialisation (p1 est ici une pile de polygones réguliers PolygoneRegulier.java)
+</span>        PileI&lt;List&lt;PolygoneRegulier&gt;&gt; p2 = <span style='font-weight:bold;color:#7B0052;'>new</span> Pile2(7);
+        
+        p1.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(4, 100));
+        p1.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(5, 100));
+        PileI p3= <span style='font-weight:bold;color:#7B0052;'>new</span> Pile2(12);
+        p3.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(5, 200));
+        p3.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(8, 150));
+        p3.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(9, 150));
+        p3.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(10, 150));
+        p3.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(11, 150));
+        p3.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(12, 150));
+        p3.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(13, 150));
+        p3.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(14, 150));
+        p3.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(15, 150));
+
+        p3.depiler();
+        p3.depiler();
+        p3.depiler();
+        p3.depiler();
+        p3.depiler();
+        p3.depiler();
+
+        PileI p4= <span style='font-weight:bold;color:#7B0052;'>new</span> Pile2(7);
+        p4.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(7, 150));
+
+        System.out.println(<span style='color:#2A00FF'>" la pile p1 = "</span> + p1);
+        <span style='color:#3F7F5F'>// p2 ne contient que des piles de polygones réguliers
+</span>        <span style='color:#3F7F5F'>//p2.empiler(p1);
+</span>        System.out.println(<span style='color:#2A00FF'>" la pile p2 = "</span> + p2);
+
+        <span style='font-weight:bold;color:#7B0052;'>try</span> <span style='font-weight:bold;color:#D3171B'>{</span>
+            p1.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(5,10)); <span style='color:#3F7F5F'>// vérifiez qu'une erreur est levée à la compilation
+</span>            <span style='color:#3F7F5F'>//String s = (String)p1.depiler();
+</span>        <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception e ) <span style='font-weight:bold;color:#D3171B'>{</span>
+            System.out.println(<span style='color:#2A00FF'>"erreur"</span>);
+            e.printStackTrace();
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    
+    <p>Dans ce contexte, p1 est une pile de PolygoneRegulier.
+        <br> Donc l'instruction String s = (String)p1.depiler(); déclenchera une erreur la compilation puisque le sommet
+        de p1 est un PolygoneRegulier et ne peut être casté en String.
+</p>
+<p>
+    C'est la même chose pour l'instruction p2.empiler(p1); qui déclenchera une erreur la compilation puisque p1 est une pile de PolygoneRegulier mais p2 est une pile de List<PolygoneRegulier>
 </p>
 
     <p><a href = "https://github.com/ljuglaret/NFP121/blob/gh-pages/tp3/question3/UneUtilisation.java">Source</a></p>

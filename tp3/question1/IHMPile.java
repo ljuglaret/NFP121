@@ -15,7 +15,7 @@ public class IHMPile extends JFrame implements ActionListener{
     private JTextField sommet = new JTextField(6);
     private JLabel     contenu = new JLabel("[]");
 
-    private Pile p;
+    private Pile0 p;
 
     /**
      * Initialise une IHM
@@ -44,7 +44,7 @@ public class IHMPile extends JFrame implements ActionListener{
         boutonEmpiler.addActionListener(this);
         boutonDepiler.addActionListener(this);
 
-        p = new Pile(5);
+        p = new Pile0(5);
 
     }
 
