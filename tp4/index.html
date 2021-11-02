@@ -91,7 +91,7 @@
         </ul>
         </p>
     <p>
-        <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test1() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test1() <span style='font-weight:bold;color:#D3171B'>{</span>
             <span style='color:#3F7F5F'>/**On crée la liste observable.*/</span>
             question1.ConcreteSubject l1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteSubject();
             <span style='color:#3F7F5F'>/**on ajoute 2 observateurs : o1.*/</span>
@@ -135,7 +135,7 @@
     </ul>
 </p>
   
-    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test2() <span style='font-weight:bold;color:#D3171B'>{</span>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test2() <span style='font-weight:bold;color:#D3171B'>{</span>
         <span style='color:#3F7F5F'>/**liste 1 .*/</span>
         question1.ConcreteSubject l1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteSubject();
         <span style='color:#3F7F5F'>/**liste 2.*/</span>
@@ -193,7 +193,7 @@
             </ul>
     </p>
 
-    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='color:#3F5FBF'>/**
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='color:#3F5FBF'>/**
         * Teste countObserver(), deleteObservers() et
         * deleteOserver(observer o)
         */</span>
@@ -236,7 +236,7 @@
     <h4>
         IHMQuestion2_1 
     </h4>
-    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
 
         <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.*;
         <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.*;
@@ -293,7 +293,7 @@
     <h4>
         JButtonObserver 
     </h4>
-    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
 
 
         <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.TextArea;
@@ -342,13 +342,108 @@
     <hr />
     <h3>Question 2.2 :  La classe JMouseObserver</h3>
 
-<p>   Pour comprendre comment fonctionner cette classe j'ai lu la doc d'oracle sur <a href = https://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseListener.html> l'interface MouseListener</a>
-et j'ai complété la méthode mouseEntered de la même manière que la méthode  void actionPerformed(ActionEvent e) dans la classe JButtonObserver.
-</p> 
+    
+<h4>
+    IHMQuestion2_2
+</h4>
 <p>
-    Concernant la position de la souris j 'ai utilisé les méthodes getX et getY expliquées dans le <a href = https://docs.oracle.com/javase/tutorial/uiswing/events/mouselistener.html> tutoriel d'Oracle</a>
+    Comme indiqué dans l'énoncé j'ai simplement fait un copier-coller de la question précédente en adaptant :     
 </p>
-<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+    
+<pre>
+    <code>
+ 
+        JButtonObserver  jbo = new JButtonObserver("jbo",contenu);
+        bouton.addActionListener(jbo);
+  
+        JMouseObserver  jmo = new JMouseObserver("jmo",contenu);
+        bouton.addMouseListener(jmo);
+</code>
+</pre>
+
+    <p>Button Observer réagira à un clic sur un boutton.
+    La réaction est défine dans la méthode
+    void actionPerformed(ActionEvent e).</p>
+  
+    <p> Mouse Observer réagira à une souris passée sur le boutton.
+     La réaction est défine dans la méthode
+     void mouseEntered(MouseEvent e) </p>
+    
+
+
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> IHMQuestion2_2 <span style='font-weight:bold;color:#7B0052;'>extends</span> JFrame <span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonA = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"A"</span>);
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonB = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"B"</span>);
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonC = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"C"</span>);
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> TextArea contenu = <span style='font-weight:bold;color:#7B0052;'>new</span> TextArea(30, 80);
+
+ 
+    <span style='font-weight:bold;color:#7B0052;'>public</span> IHMQuestion2_2() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>super</span>(<span style='color:#2A00FF'>"IHM Question2_2"</span>);
+        JPanel enHaut = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+        enHaut.add(boutonA);
+        enHaut.add(boutonB);
+        enHaut.add(boutonC);
+        setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> BorderLayout(5, 5));
+        add(<span style='color:#2A00FF'>"North"</span>, enHaut);
+        add(<span style='color:#2A00FF'>"Center"</span>, contenu); <span style='color:#3F7F5F'>// contenu sera transmis aux observateurs, voir
+</span>                                <span style='color:#3F7F5F'>// la description des constructeurs
+</span>        setLocation(150,150);pack();show();
+        enHaut.setBackground(Color.magenta);
+        
+
+        <span style='color:#3F7F5F'>// � compl�ter � l'identique de la question 2_1, (du copier/coller)...
+</span>        <span style='color:#3F7F5F'>// le bouton A a 3 observateurs jbo1, jbo2 et jbo3
+</span>        JButtonObserver  jbo1 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButtonObserver(<span style='color:#2A00FF'>"jbo1"</span>,contenu);
+        JButtonObserver  jbo2 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButtonObserver(<span style='color:#2A00FF'>"jbo2"</span>,contenu);
+        JButtonObserver  jbo3 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButtonObserver(<span style='color:#2A00FF'>"jbo3"</span>,contenu);
+        
+        boutonA.addActionListener(jbo1);
+        boutonA.addActionListener(jbo2);
+        boutonA.addActionListener(jbo3);
+
+        <span style='color:#3F7F5F'>// le bouton B a 2 observateurs jbo1 et jbo2
+</span>        boutonB.addActionListener(jbo1);
+        boutonB.addActionListener(jbo2);
+
+        <span style='color:#3F7F5F'>// le bouton C a 1 observateur jbo1
+</span>        boutonC.addActionListener(jbo1);
+        <span style='color:#3F7F5F'>// � compl�ter pour la question 2_2 (JMouseObserver)
+</span>        JMouseObserver  jmo1 = <span style='font-weight:bold;color:#7B0052;'>new</span> JMouseObserver(<span style='color:#2A00FF'>"jmo1"</span>,contenu);
+        JMouseObserver  jmo2 = <span style='font-weight:bold;color:#7B0052;'>new</span> JMouseObserver(<span style='color:#2A00FF'>"jmo2"</span>,contenu);
+        JMouseObserver  jmo3 = <span style='font-weight:bold;color:#7B0052;'>new</span> JMouseObserver(<span style='color:#2A00FF'>"jmo3"</span>,contenu);
+            <span style='color:#3F7F5F'>// le bouton A a 1 observateur jmo1
+</span>        boutonA.addMouseListener(jmo1);
+
+            <span style='color:#3F7F5F'>// le bouton B a 1 observateur jmo2
+</span>        boutonB.addMouseListener(jmo2);
+
+            <span style='color:#3F7F5F'>// le bouton C a 1 observateur jmo3
+</span>        boutonC.addMouseListener(jmo3);
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+    
+     <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> main(String[] args)<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>new</span> IHMQuestion2_1();
+        <span style='font-weight:bold;color:#7B0052;'>new</span> IHMQuestion2_2();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+
+
+
+ <h4>
+    JMouseObserver
+    </h4>
+    <p>   Pour comprendre comment fonctionner cette classe j'ai lu la doc d'oracle sur <a href = https://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseListener.html> l'interface MouseListener</a>
+        et j'ai complété la méthode mouseEntered de la même manière que la méthode  void actionPerformed(ActionEvent e) dans la classe JButtonObserver.
+        </p> 
+        <p>
+            Concernant la position de la souris j 'ai utilisé les méthodes getX et getY expliquées dans le <a href = https://docs.oracle.com/javase/tutorial/uiswing/events/mouselistener.html> tutoriel d'Oracle</a>
+        </p>
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
 
     <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.MouseEvent;
     <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.TextArea;
@@ -397,7 +492,7 @@ et j'ai complété la méthode mouseEntered de la même manière que la méthode
     <br />
     <hr />
     <h3>Question 3.1 : Le modèle MVC</h3>
-    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> PileModele&lt;T&gt; <span style='font-weight:bold;color:#7B0052;'>extends</span>  java.util.Observable <span style='font-weight:bold;color:#7B0052;'>implements</span> PileI&lt;T&gt; <span style='font-weight:bold;color:#D3171B'>{</span>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> PileModele&lt;T&gt; <span style='font-weight:bold;color:#7B0052;'>extends</span>  java.util.Observable <span style='font-weight:bold;color:#7B0052;'>implements</span> PileI&lt;T&gt; <span style='font-weight:bold;color:#D3171B'>{</span>
 
         <span style='font-weight:bold;color:#7B0052;'>private</span> PileI&lt;T&gt; pile;
     
@@ -487,7 +582,7 @@ et j'ai complété la méthode mouseEntered de la même manière que la méthode
     <h3>Question 3.3</h3>
     <p>
         Dans la classe IHMCalculette il y a deux nouvelles lignes à ajouter : 
-        <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='color:#3F7F5F'>/********************************/</span>
+        <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:Courier New, Courier, monospace; overflow: auto;'><span style='color:#3F7F5F'>/********************************/</span>
             Vue2 vue2 = <span style='font-weight:bold;color:#7B0052;'>new</span> Vue2(modele);
             add(vue2);
         <span style='color:#3F7F5F'>/********************************/</span></pre>
