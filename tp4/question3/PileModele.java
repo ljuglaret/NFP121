@@ -11,8 +11,6 @@ public class PileModele<T> extends  java.util.Observable implements PileI<T> {
 
     private PileI<T> pile;
 
-    /* à compléter */
-
     public PileModele(PileI<T> pile) {
         this.pile = pile;
     }
@@ -25,9 +23,9 @@ public class PileModele<T> extends  java.util.Observable implements PileI<T> {
         if (estPleine()){
             throw new PilePleineException("pile pleine");
         }
+        this.pile.empiler(o);
         setChanged();
         notifyObservers();
-        this.pile.empiler(o);
     }
 
     /***
@@ -38,9 +36,14 @@ public class PileModele<T> extends  java.util.Observable implements PileI<T> {
         if (estVide()){
             throw new PileVideException("pile vide");
         }
-        setChanged();
-        notifyObservers();
-        return this.pile.depiler();
+        
+        try{
+            return this.pile.depiler();
+        }
+        finally{
+            setChanged();
+            notifyObservers();
+        }
     }
 
     /***
@@ -48,10 +51,8 @@ public class PileModele<T> extends  java.util.Observable implements PileI<T> {
      */
     public T sommet() throws PileVideException {
         if (estVide()){
-            throw new PileVideException("pile vide");
+            throw new PileVideException();
         }
-        setChanged();
-        notifyObservers();
         return this.pile.sommet();
     }
 
@@ -59,8 +60,6 @@ public class PileModele<T> extends  java.util.Observable implements PileI<T> {
      *@return le nombre d'éléments contenu dans la pile
      */
     public int taille() { 
-        setChanged();
-        notifyObservers();
         return pile.taille();
     }
 
@@ -68,8 +67,6 @@ public class PileModele<T> extends  java.util.Observable implements PileI<T> {
     *@return le nombre d'éléments pouvant être contenu dans la pile
     */
     public int capacite() {
-        setChanged();
-        notifyObservers();
         return pile.capacite();
     }
 
@@ -77,8 +74,6 @@ public class PileModele<T> extends  java.util.Observable implements PileI<T> {
      *@return vrai si la pile est vide, faux sinon
      */
     public boolean estVide() {
-        setChanged();
-        notifyObservers();
         return pile.estVide();
     }
 
@@ -86,8 +81,6 @@ public class PileModele<T> extends  java.util.Observable implements PileI<T> {
      *@return vrai si la pile et pleine, faux sinon
      */
     public boolean estPleine() {
-        setChanged();
-        notifyObservers();
         return pile.estPleine();
     }
 

@@ -96,22 +96,25 @@ public class Controleur extends JPanel {
                     clear.setEnabled(true);
                     push.setEnabled(true);
             }
-            else if(pile.taille() == pile.capacite()){
-                        add.setEnabled(false);
-                        sub.setEnabled(false);
-                        mul.setEnabled(false);
-                        div.setEnabled(false);
-                        clear.setEnabled(true);
-                        push.setEnabled(false);
+            
+            else if(pile.taille() > 1){
+                 add.setEnabled(true);
+                  sub.setEnabled(true);
+                  mul.setEnabled(true);
+                  div.setEnabled(true);
+                  clear.setEnabled(true);
+                  push.setEnabled(true);        
+            
             }
-                //(pile.taille() > 1
+            // pile pleine
             else {
-                      add.setEnabled(true);
-                      sub.setEnabled(true);
-                      mul.setEnabled(true);
-                      div.setEnabled(true);
-                      clear.setEnabled(true);
-                      push.setEnabled(true);
+                add.setEnabled(true);
+                sub.setEnabled(true);
+                mul.setEnabled(true);
+                div.setEnabled(true);
+                clear.setEnabled(true);
+                push.setEnabled(false);
+             
             }                           
         }
 
@@ -127,7 +130,7 @@ public class Controleur extends JPanel {
             this.pile.empiler(operande());
         }
         catch(Exception e){
-         System.out.println("incidence sur la pile d'évaluation ");
+        // System.out.println("incidence sur la pile d'évaluation ");
         }
         this.actualiserInterface();
     }
@@ -144,7 +147,7 @@ public class Controleur extends JPanel {
             this.pile.empiler(val2 + val1);
         }
         catch(Exception e){
-            System.out.println("probleme avec l'operateur +");
+           // System.out.println("probleme avec l'operateur +");
         }
         this.actualiserInterface();
     }
@@ -160,7 +163,7 @@ public class Controleur extends JPanel {
             this.pile.depiler();
             this.pile.empiler(val2 - val1);
         }catch(Exception e){
-            System.out.println("probleme avec l'operateur -");
+          //  System.out.println("probleme avec l'operateur -");
         }
         this.actualiserInterface();
     }
@@ -176,27 +179,31 @@ public class Controleur extends JPanel {
             this.pile.depiler();
             this.pile.empiler(val2 * val1);
         }catch(Exception e){
-            System.out.println("probleme avec l'operateur *");
+        //    System.out.println("probleme avec l'operateur *");
         }
         this.actualiserInterface();
     }
     
     /**
-    * Divisio
+    * Division
     */
     public void div(){
          try{
             int val1 = this.pile.sommet();
-            this.pile.depiler();
-            int val2 = this.pile.sommet();
-            this.pile.depiler();
-            this.pile.empiler(val2 / val1);
-        }
-        catch(ArithmeticException e){
-             System.out.println("division par 0 impossible");
+          
+            if(val1 != 0){
+                this.pile.depiler();
+                int val2 = this.pile.sommet();
+                this.pile.depiler();
+                this.pile.empiler(val2 / val1);
+            }
+            if(val1 == 0){
+                //on ne fait rien
+            }
+            
         }
         catch(Exception e){
-            System.out.println("probleme avec l'operateur /");
+          //  System.out.println("probleme avec l'operateur /");
         }
         this.actualiserInterface();
     

@@ -46,8 +46,8 @@
 
 </head>
 <body>
-    <h2 style="text-align: center">NFP 121 - TP3</h2>
-    <h2 style="text-align: center">Pattern Observer - Ev�nement - Mod�le MVC</h2>
+    <h2 style="text-align: center">NFP 121 - TP4</h2>
+    <h2 style="text-align: center">Pattern Observer / événements / modèle MVC </h2>
     <br />
     <hr>
     <br />
@@ -55,53 +55,447 @@
         <tr>
             <td>Nom
             </td>
-            <td>...
+            <td>Juglaret    
             </td>
         </tr>
         <tr>
-            <td>Pr�nom
+            <td>Prénom
             </td>
-            <td>...
+            <td>Laure
             </td>
         </tr>
         <tr>
             <td>Matricule
             </td>
-            <td>...
+            <td>0G5DRL8UNZ3 
             </td>
         </tr>
     </table>
 		
 	<br />
     <hr />
-    <h3>Question 1</h3>
-    Complétez les 3 méthodes de test de la classe "PatternObservateur". 
-    <br />
-    <hr />
-    <h3>Question 2.1 :  Introduction aux événements de l'AWT</h3>
-    IHMQuestion2_1 et JButtonObserver 
-    <br />
-    <hr />
-    <h3>Question 2.2 :  La classe JMouseObserver</h3>
-    IHMQuestion2_2 et JMouseObserver 
-    <br />
-    <hr />
-    <h3>Question 3.1</h3>
-    Votre r�ponse...
+    <h3>Question 1 : </h3>
+    Pour la représentation des piles <b>arguments</b> et <b>senders</b> dans les commentaires j'ai choisi de placer le sommet à droite.
+
+    <h4> Test  1 : Teste la notification d'une liste avec 2 observateurs.</h4>
+        <p>
+            Initialement : 
+            <br>
+            Pour o1 
+            <ul><li>Pile arguments = test | 1</li>
+            <li>Pile senders =   l1 | l1 </li></ul>
+            <br>
+            Pour o2 
+            <ul><li>Pile arguments = test | 1</li>
+            <li>Pile senders = l1 | l1 </li></ul>
+        </ul>
+        </p>
+    <p>
+        <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test1() <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='color:#3F7F5F'>/**On crée la liste observable.*/</span>
+            question1.ConcreteSubject l1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteSubject();
+            <span style='color:#3F7F5F'>/**on ajoute 2 observateurs : o1.*/</span>
+            question1.ConcreteObserver o1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteObserver();
+            <span style='color:#3F7F5F'>/**o2.*/</span>
+            question1.ConcreteObserver o2 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteObserver();
+            l1.addObserver(o1);
+            l1.addObserver(o2);
+            l1.insert(<span style='color:#2A00FF'>"test"</span>);
+            l1.insert(<span style='color:#2A00FF'>" 1 "</span>);
+            
+            <span style='color:#3F7F5F'>// vérifier que les deux observateurs ont bien été notifiés avec les
+    </span>        <span style='color:#3F7F5F'>// bons paramètres
+    </span>        assertFalse(o1.senders().empty());
+            assertFalse(o2.senders().empty()); 
+            assertEquals(l1, o1.senders().pop()); 
+            assertEquals(l1, o1.senders().pop());
+            //la pile senders de o1 est vide  
+
+            assertEquals(l1, o2.senders().pop());
+            assertEquals(l1, o2.senders().pop()); 
+            //la pile senders de o2 est vide 
+
+            assertEquals(<span style='color:#2A00FF'>" 1 "</span>, o1.arguments().pop());
+            assertEquals(<span style='color:#2A00FF'>" 1 "</span>, o2.arguments().pop());
+            assertEquals(<span style='color:#2A00FF'>"test"</span>, o1.arguments().pop());
+            //la pile arguments de o1 est vide 
+
+            assertEquals(<span style='color:#2A00FF'>"test"</span>, o2.arguments().pop());
+            //la pile arguments de o2 est vide 
+
+            assertTrue(o1.senders().empty() && o1.arguments().empty());
+            assertTrue(o2.senders().empty() && o2.arguments().empty());
+        <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    </p>
+    <h4> Test  2 : 2 listes, 1 observateur.</h4>
+<p>
+    <ul>
+        <li>    Pile arguments = test A | A | testB | B</li>
+        <li>    Pile senders =   l1 | l1 | l2 | l2 | l2</li>    
+    </ul>
+</p>
+  
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test2() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='color:#3F7F5F'>/**liste 1 .*/</span>
+        question1.ConcreteSubject l1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteSubject();
+        <span style='color:#3F7F5F'>/**liste 2.*/</span>
+        question1.ConcreteSubject l2 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteSubject();
+        
+        <span style='color:#3F7F5F'>/**observateur o.*/</span>
+        question1.ConcreteObserver o = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteObserver();
+        l1.addObserver(o);
+        l2.addObserver(o);
+        l1.insert(<span style='color:#2A00FF'>"testA"</span>);
+        l1.insert(<span style='color:#2A00FF'>" A "</span>);
+        l2.insert(<span style='color:#2A00FF'>"testB"</span>);
+        l2.insert(<span style='color:#2A00FF'>" B "</span>);
+
+
+        <span style='color:#3F7F5F'>// vérifier que l'observateur a bien été notifié par les deux listes
+</span>        
+
+        assertEquals(l2, o.senders().pop());
+        assertEquals(l2, o.senders().pop());
+        assertEquals(l1, o.senders().pop());
+        assertEquals(l1, o.senders().pop());
+        //la pile senders de o est vide 
+
+        assertEquals(<span style='color:#2A00FF'>" B "</span>, o.arguments().pop()); 
+        assertEquals(<span style='color:#2A00FF'>"testB"</span>, o.arguments().pop()); 
+        assertEquals(<span style='color:#2A00FF'>" A "</span>, o.arguments().pop());
+        assertEquals(<span style='color:#2A00FF'>"testA"</span>, o.arguments().pop());
+        //la pile arguments de o est vide 
+
+        assertTrue(o.senders().empty() && o.arguments().empty());
+
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <h4> Test 3 :  2 listes, 2 observateurs.</h4>
+    <p>
+    
+          pour o1 
+            <ul>
+                <li>
+                    pile arguments = vide
+                </li>
+                <li>
+                    pile senders =   l1 | l2
+                </li>
+            </ul>
+            pour o2 
+            <ul>
+                <li>
+                    pile arguments = vide       
+                </li>
+                <li>
+                    pile senders = l1 | l2
+                </li>
+            </ul>
+    </p>
+
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='color:#3F5FBF'>/**
+        * Teste countObserver(), deleteObservers() et
+        * deleteOserver(observer o)
+        */</span>
+         
+       <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test3() <span style='font-weight:bold;color:#D3171B'>{</span>
+           question1.ConcreteSubject l1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteSubject();
+           question1.ConcreteSubject l2 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteSubject();
+           question1.ConcreteObserver o1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteObserver();
+           question1.ConcreteObserver o2 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteObserver();
+           l1.addObserver(o1);
+           l1.addObserver(o2);
+           l2.addObserver(o1);
+           l2.addObserver(o2);
+           
+           <span style='color:#3F7F5F'>// vérifier le bon fonctionnement de countObservers(), de deleteObserver
+   </span>        
+           assertTrue(l1.countObservers() == 2);
+           assertTrue(l2.countObservers() == 2);
+           
+           l1.deleteObserver(o1);
+           <span style='color:#3F7F5F'>// l1 n'a plus qu'un observeur : o2
+   </span>        
+           assertTrue(l1.countObservers() == 1);
+           
+           l1.deleteObserver(o2);
+           <span style='color:#3F7F5F'>// l1 n'a plus aucun observeur
+   </span>                
+           l2.deleteObservers();
+           <span style='color:#3F7F5F'>// l2 n'a plus aucun observeur
+   </span>
+           assertTrue(o1.senders().empty());
+           assertTrue(o2.senders().empty());
+           assertTrue(l1.countObservers() == 0);
+           assertTrue(l2.countObservers() == 0);
+       <span style='font-weight:bold;color:#D3171B'>}</span></pre>
 
     <br />
     <hr />
+    <h3>Question 2.1 :  Introduction aux événements de l'AWT</h3>
+    <h4>
+        IHMQuestion2_1 
+    </h4>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+        <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.*;
+        <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.*;
+        <span style='font-weight:bold;color:#7B0052;'>import</span> javax.swing.*;
+        
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> IHMQuestion2_1 <span style='font-weight:bold;color:#7B0052;'>extends</span> JFrame <span style='font-weight:bold;color:#D3171B'>{</span>
+        
+            <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonA = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"A"</span>);
+            <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonB = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"B"</span>);
+            <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonC = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"C"</span>);
+        
+            <span style='font-weight:bold;color:#7B0052;'>private</span> TextArea contenu = <span style='font-weight:bold;color:#7B0052;'>new</span> TextArea(30, 80);
+        
+         
+            <span style='font-weight:bold;color:#7B0052;'>public</span> IHMQuestion2_1() <span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>super</span>(<span style='color:#2A00FF'>"IHM Question2_1"</span>);
+                JPanel enHaut = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+                enHaut.add(boutonA);
+                enHaut.add(boutonB);
+                enHaut.add(boutonC);
+                setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> BorderLayout(5, 5));
+                add(<span style='color:#2A00FF'>"North"</span>, enHaut);
+                add(<span style='color:#2A00FF'>"Center"</span>, contenu); <span style='color:#3F7F5F'>// contenu sera transmis aux observateurs, voir
+        </span>                                <span style='color:#3F7F5F'>// la description des constructeurs
+        </span>        enHaut.setBackground(Color.blue);
+                setLocation(100,100);
+                pack();show();
+        
+                <span style='color:#3F7F5F'>// à compléter
+        </span>        <span style='color:#3F7F5F'>// le bouton A a 3 observateurs jbo1, jbo2 et jbo3
+        </span>        JButtonObserver  jbo1 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButtonObserver(<span style='color:#2A00FF'>"jbo1"</span>,contenu);
+                JButtonObserver  jbo2 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButtonObserver(<span style='color:#2A00FF'>"jbo2"</span>,contenu);
+                JButtonObserver  jbo3 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButtonObserver(<span style='color:#2A00FF'>"jbo3"</span>,contenu);
+                
+                boutonA.addActionListener(jbo1);
+                boutonA.addActionListener(jbo2);
+                boutonA.addActionListener(jbo3);
+        
+                <span style='color:#3F7F5F'>// le bouton B a 2 observateurs jbo1 et jbo2
+        </span>        boutonB.addActionListener(jbo1);
+                boutonB.addActionListener(jbo2);
+        
+                <span style='color:#3F7F5F'>// le bouton C a 1 observateur jbo1
+        </span>        boutonC.addActionListener(jbo1);
+        
+              
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+            
+            <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> main(String[] args)<span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>new</span> IHMQuestion2_1();
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+        
+        <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <h4>
+        JButtonObserver 
+    </h4>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+
+        <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.TextArea;
+        <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.ActionListener;
+        <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.ActionEvent;
+        
+        <span style='color:#3F5FBF'>/**
+         * Décrivez votre classe JButtonObserver ici.
+         * 
+         * @author (votre nom)
+         * @version (un numéro de version ou une date)
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> JButtonObserver <span style='font-weight:bold;color:#7B0052;'>implements</span> ActionListener<span style='font-weight:bold;color:#D3171B'>{</span> <span style='color:#3F7F5F'>// à compléter
+        </span>
+            <span style='font-weight:bold;color:#7B0052;'>private</span> String nom;
+            <span style='font-weight:bold;color:#7B0052;'>private</span> TextArea contenu;
+        
+            <span style='color:#3F5FBF'>/**
+             * Constructeur d'objets de classe JButtonObserver
+             * 
+             * @param nom
+             *            le nom du bouton, jbo1, jbo2, jbo3, jmo1, jmo2, jmo3
+             * @param contenu
+             *            la zone de texte de l'applette
+             */</span>
+            <span style='font-weight:bold;color:#7B0052;'>public</span> JButtonObserver(String nom, TextArea contenu) <span style='font-weight:bold;color:#D3171B'>{</span>
+                this.nom = nom;
+                this.contenu = contenu;
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+        
+            <span style='color:#3F5FBF'>/**
+             * affichage d'un message dans la zone de texte ce message est de la forme
+             * observateur this.nom : clic du bouton nom_du_bouton exemple : observateur
+             * jbo1 : clic du bouton A, voir la méthode getActionCommand()
+             * 
+             * @param à
+             *            compléter
+             */</span>
+           <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed(ActionEvent e) <span style='font-weight:bold;color:#D3171B'>{</span>
+                String message = <span style='color:#2A00FF'>"observateur "</span>+this.nom+<span style='color:#2A00FF'>" : clic du bouton  "</span>+e.getActionCommand(); 
+                contenu.append(message + <span style='color:#2A00FF'>"\n"</span>);
+            <span style='font-weight:bold;color:#D3171B'>}</span> 
+        
+        <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br />
+    <hr />
+    <h3>Question 2.2 :  La classe JMouseObserver</h3>
+
+<p>   Pour comprendre comment fonctionner cette classe j'ai lu la doc d'oracle sur <a href = https://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseListener.html> l'interface MouseListener</a>
+et j'ai complété la méthode mouseEntered de la même manière que la méthode  void actionPerformed(ActionEvent e) dans la classe JButtonObserver.
+</p> 
+<p>
+    Concernant la position de la souris j 'ai utilisé les méthodes getX et getY expliquées dans le <a href = https://docs.oracle.com/javase/tutorial/uiswing/events/mouselistener.html> tutoriel d'Oracle</a>
+</p>
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.MouseEvent;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.TextArea;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.MouseListener;
+    
+    <span style='color:#3F5FBF'>/**
+     * Classe JButtonObserver 
+    
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> JMouseObserver <span style='font-weight:bold;color:#7B0052;'>implements</span> MouseListener <span style='font-weight:bold;color:#D3171B'>{</span> 
+    
+        <span style='font-weight:bold;color:#7B0052;'>private</span> String nom;
+        <span style='font-weight:bold;color:#7B0052;'>private</span> TextArea contenu;
+    
+        <span style='color:#3F5FBF'>/**
+         * Constructeur d'objets de classe JButtonObserver
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> JMouseObserver(String nom, TextArea contenu) <span style='font-weight:bold;color:#D3171B'>{</span>
+            this.nom = nom;
+            this.contenu = contenu;
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> mouseClicked(MouseEvent e) <span style='font-weight:bold;color:#D3171B'>{</span>
+           
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    
+        <span style='color:#3F5FBF'>/**
+         * affichage d'un message dans la zone de texte ce message est de la forme
+         * observateur this.nom : souris entrée en (X,Y) exemple : observateur jmo1
+         * : souris entrée en (15,20)
+         * 
+         * @param
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> mouseEntered(MouseEvent e) <span style='font-weight:bold;color:#D3171B'>{</span>
+            String message = <span style='color:#2A00FF'>"observateur "</span>+this.nom+<span style='color:#2A00FF'>" : souris entree en :   ( "</span>+  e.getX() + <span style='color:#2A00FF'>","</span> + e.getY() + <span style='color:#2A00FF'>" ) "</span>;
+            contenu.append(message + <span style='color:#2A00FF'>"\n"</span>);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> mouseExited(MouseEvent e) <span style='font-weight:bold;color:#D3171B'>{</span><span style='font-weight:bold;color:#D3171B'>}</span>
+    
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> mousePressed(MouseEvent e) <span style='font-weight:bold;color:#D3171B'>{</span><span style='font-weight:bold;color:#D3171B'>}</span>
+    
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> mouseReleased(MouseEvent e) <span style='font-weight:bold;color:#D3171B'>{</span><span style='font-weight:bold;color:#D3171B'>}</span>
+    
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br />
+    <hr />
+    <h3>Question 3.1 : Le modèle MVC</h3>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> PileModele&lt;T&gt; <span style='font-weight:bold;color:#7B0052;'>extends</span>  java.util.Observable <span style='font-weight:bold;color:#7B0052;'>implements</span> PileI&lt;T&gt; <span style='font-weight:bold;color:#D3171B'>{</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> PileI&lt;T&gt; pile;
+    
+        <span style='font-weight:bold;color:#7B0052;'>public</span> PileModele(PileI&lt;T&gt; pile) <span style='font-weight:bold;color:#D3171B'>{</span>
+            this.pile = pile;
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    
+        <span style='color:#3F7F5F'>/***
+         * Place o au sommet de la pile
+         * @param o
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> empiler(T o) <span style='font-weight:bold;color:#7B0052;'>throws</span> PilePleineException <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>if</span> (estPleine())<span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PilePleineException(<span style='color:#2A00FF'>"pile pleine"</span>);
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+            this.pile.empiler(o);
+            setChanged();
+            notifyObservers();
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    
+        <span style='color:#3F7F5F'>/***
+         * Retire le sommet de la pile
+         * @return le sommet
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> T depiler() <span style='font-weight:bold;color:#7B0052;'>throws</span> PileVideException <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>if</span> (estVide())<span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PileVideException(<span style='color:#2A00FF'>"pile vide"</span>);
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+            
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>return</span> this.pile.depiler();
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+            <span style='font-weight:bold;color:#7B0052;'>finally</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                setChanged();
+                notifyObservers();
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    
+        <span style='color:#3F7F5F'>/***
+         * @return le sommet
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> T sommet() <span style='font-weight:bold;color:#7B0052;'>throws</span> PileVideException <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>if</span> (estVide())<span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PileVideException();
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+            <span style='font-weight:bold;color:#7B0052;'>return</span> this.pile.sommet();
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    
+        <span style='color:#3F7F5F'>/***
+         *@return le nombre d'éléments contenu dans la pile
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> taille() <span style='font-weight:bold;color:#D3171B'>{</span> 
+            <span style='font-weight:bold;color:#7B0052;'>return</span> pile.taille();
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    
+        <span style='color:#3F7F5F'>/***
+        *@return le nombre d'éléments pouvant être contenu dans la pile
+        */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> capacite() <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>return</span> pile.capacite();
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    
+        <span style='color:#3F7F5F'>/***
+         *@return vrai si la pile est vide, faux sinon
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estVide() <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>return</span> pile.estVide();
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    
+        <span style='color:#3F7F5F'>/***
+         *@return vrai si la pile et pleine, faux sinon
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estPleine() <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>return</span> pile.estPleine();
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    
+        <span style='font-weight:bold;color:#7B0052;'>public</span> String toString() <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>return</span> pile.toString();
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br />
+    <hr />
     <h3>Question 3.2</h3>
-    Votre r�ponse...
 
     <br />
     <hr />
     <h3>Question 3.3</h3>
-    Votre r�ponse...
+    Dans la classe IHMCalculette il y a deux nouvelles à ajouter : 
+    <img src="https://ljuglaret.github.io/NFP121/tp4/q3.png" alt="Tp1">
+
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='color:#3F7F5F'>/********************************/</span>
+        Vue2 vue2 = <span style='font-weight:bold;color:#7B0052;'>new</span> Vue2(modele);
+        add(vue2);
+    <span style='color:#3F7F5F'>/********************************/</span></pre>
 	
     <br />
     <hr />    
         <h3>Conclusion, biliographie et remarques :</h3>
-        <i style="font-size:12px;">... Une seule page html, limitez le nombre de clics, (plus de 200 rapports � corriger chaque semaine)</i>
+        <a href="https://github.com/ljuglaret/NFP121/tree/gh-pages/tp4">Sources</a>
 </body>
 </html>
