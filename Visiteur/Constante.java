@@ -1,7 +1,7 @@
 public class Constante implements Expr{
-    private int valeur;
+    private double valeur;
     
-    public Constante (int valeur){
+    public Constante (double valeur){
         this.valeur = valeur;
     }
     
@@ -9,7 +9,7 @@ public class Constante implements Expr{
         return visiteur.visitConstante(this);
     }
     
-    public int getValeur(){
+    public double getValeur(){
         return valeur;
     }
     
