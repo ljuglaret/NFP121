@@ -15,4 +15,6 @@
 -   [Adapteur (cours 3)](https://ljuglaret.github.io/NFP121/cours3/Adapteur/)
 -   [Observateur Observe](https://ljuglaret.github.io/NFP121/ObsPlusMoins)
 -   [Visiteur](https://ljuglaret.github.io/NFP121/Visiteur)
+-   [Proxy (Ed6)](https://ljuglaret.github.io/NFP121/Proxy)
+
 
