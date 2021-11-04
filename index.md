@@ -1,9 +1,12 @@
 ﻿# NFP121
 
 ## EDs 
--   [eds2-3](https://ljuglaret.github.io/NFP121/ed2/)
--   [ed5](https://ljuglaret.github.io/NFP121/ed5/) 
--   [ed6](https://ljuglaret.github.io/NFP121/ed6/)
+-   [Eds2-3](https://ljuglaret.github.io/NFP121/ed2/)
+-   [Ed5](https://ljuglaret.github.io/NFP121/ed5/) 
+-   Ed6
+
+    -   [Questions 1 et 2](https://ljuglaret.github.io/NFP121/Ed6/Adaptateur)
+    -   [Question 3](https://ljuglaret.github.io/NFP121/Ed6/Proxy/)
 
 
 
