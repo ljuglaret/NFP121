@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=FullException
+comment1.params=
+comment1.target=FullException()
+comment1.text=\r\n\ sans\ message\ d'erreur\r\n
+comment2.params=s
+comment2.target=FullException(java.lang.String)
+comment2.text=\r\n\ avec\ message\ d'erreur\r\n
+numComments=3
