@@ -12,6 +12,7 @@
 -   [tp4](https://ljuglaret.github.io/NFP121/tp4/)
 
 ## Pattern exemples
+-   [Adapteur (cours 3)](https://ljuglaret.github.io/NFP121/Adapteur)
 -   [Observateur Observe](https://ljuglaret.github.io/NFP121/ObsPlusMoins)
 -   [Visiteur](https://ljuglaret.github.io/NFP121/Visiteur)
 
