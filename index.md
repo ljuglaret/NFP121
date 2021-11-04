@@ -2,7 +2,9 @@
 
 ## EDs 
 -   [eds2-3](https://ljuglaret.github.io/NFP121/ed2/)
--   [ed5](https://ljuglaret.github.io/NFP121/ed5/)
+-   [ed5](https://ljuglaret.github.io/NFP121/ed5/) 
+-   [ed6](https://ljuglaret.github.io/NFP121/ed6/)
+
 
 
 ## TPs
