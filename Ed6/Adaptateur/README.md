@@ -1,2 +1,2 @@
 
-[Sources](https://github.com/ljuglaret/NFP121/tree/gh-pages/ed6/Adaptateur)
+[Sources](https://github.com/ljuglaret/NFP121/tree/gh-pages/Ed6/Adaptateur)
