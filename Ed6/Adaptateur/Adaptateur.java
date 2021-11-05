@@ -1,41 +1,30 @@
 package Adaptateur;
 
-/**
- * Décrivez votre classe FileEntier ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
- */
 public class Adaptateur implements FileEntiersI
 {
-    public Buffer adaptee;
+    public CollectionI adaptee;
 
-    public Adaptateur(Buffer adaptee){
+    public Adaptateur(CollectionI adaptee){
         this.adaptee = adaptee;
     }
 
     public void enfiler(int i) throws FilePleineException{
-        if (adaptee.full()){
-            throw new FilePleineException("file pleine");
-        }
-        
+      
         try{
             adaptee.put(i);
         }
-        catch(BufferFullException e){}
+        catch(FullException e){
+         throw new FilePleineException("file pleine");}
+
     }
     
     public int defiler() throws FileVideException{
-        if (adaptee.empty()){
-            throw new FileVideException("file vide");
-        }
-        
         try{
             return adaptee.get();
         }
-        catch(BufferEmptyException e){
+        catch(EmptyException e){
         }
-        return 0;
+        throw new FileVideException("file vide");
     }
     
     public int taille(){return adaptee.size();}
