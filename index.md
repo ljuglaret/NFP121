@@ -19,7 +19,7 @@
 ## Pattern exemples
 -   [Adapteur (cours 3)](https://ljuglaret.github.io/NFP121/cours3/Adapteur/)
 -   [Observateur Observe](https://ljuglaret.github.io/NFP121/ObsPlusMoins)
--   [Visiteur](https://ljuglaret.github.io/NFP121/Visiteur)
+-   [Visiteur](https://ljuglaret.github.io/VisiteurVsCaseOf/)
 -   [Proxy (Ed6)](https://ljuglaret.github.io/NFP121/Ed6/Proxy/)
 
 
