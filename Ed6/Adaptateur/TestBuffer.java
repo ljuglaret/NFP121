@@ -3,7 +3,7 @@ package Adaptateur;
 public class TestBuffer extends junit.framework.TestCase{
 
   public void testBufferStandard(){
-    Buffer file = new Buffer(6);
+    CollectionI file = new Buffer(6);
     assertTrue(file.empty());
     assertFalse(file.full());
     int taille = 0;
@@ -35,7 +35,7 @@ public class TestBuffer extends junit.framework.TestCase{
   }
   
   public void testBufferSimple(){
-    Buffer file = new Buffer(6);
+    CollectionI file = new Buffer(6);
     assertEquals(6,file.capacity());
     assertEquals(0,file.size());
     assertTrue(file.empty());
@@ -61,7 +61,7 @@ public class TestBuffer extends junit.framework.TestCase{
   }
   
   public void testBufferAvecExceptions(){
-    Buffer file = new  Buffer(3);
+    CollectionI file = new  Buffer(3);
     assertTrue(file.empty());
     assertFalse(file.full());
     for(int i = 1; i<=3; i++){

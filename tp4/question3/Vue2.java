@@ -6,7 +6,9 @@ import java.awt.event.*;
 
 import java.util.Observable;
 import java.util.Observer;
-
+/**
+ * Classe Vue2
+*/
  public class Vue2 extends JPanel implements Observer {
   
   private JSlider jauge;

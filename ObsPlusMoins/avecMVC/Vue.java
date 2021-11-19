@@ -41,9 +41,8 @@ public class Vue extends JPanel implements IObservateur  {
         this.plus.addActionListener(e);    
     }
     
-    public void actualiser(IObservable o){
+    public void actualiser(IObservable o , Object obj){
         modele.notifierObservateurs( );
-        etatVal.setText(String.valueOf(modele.getValeur( ))); 
-        System.out.println(String.valueOf(modele.getValeur( )));
+        etatVal.setText(String.valueOf(obj)); 
     };
 } 

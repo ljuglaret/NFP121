@@ -9,20 +9,28 @@ public class CommandeConcreteColler implements Commande{
     private Recepteur recepteur     =   null;
     private String contenuAColler   =   null;
     private String contenuPrecedent =   null;
+    private int position            =   0;
     
-    public CommandeConcreteColler (Recepteur recepteur, String contenuAColler) {
-        this.recepteur=recepteur;
-        this.contenuAColler=contenuAColler;
+    public CommandeConcreteColler (Recepteur recepteur, String contenuAColler, int position) {
+        this.recepteur      =   recepteur;
+        this.contenuAColler =   contenuAColler;
+        this.position       =   position;
     }
     
     public void lancer() {
         contenuPrecedent = recepteur.getContenu();
         recepteur.copier(contenuAColler);
-        recepteur.coller();
-        System.out.println("Donnees collées dans "+ recepteur.getNom() +" nouveau contenu : "+recepteur.getContenu());
+        if (position > contenuPrecedent.length()){
+            position = contenuPrecedent.length();
+        }
+        recepteur.coller(position);
+        System.out.println("Donnees collées dans - "+ recepteur.getNom()+ "- position - " + position );
     }
-    
+       public String getDonneesCollees() {
+        return contenuAColler;
+    }
     public void annulerColler() {
         recepteur.setContent(contenuPrecedent);
     }
+    
 }

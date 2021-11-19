@@ -18,8 +18,6 @@ public class IHM extends JFrame {
         pack();
         setLocation(200,200);
         setVisible(true);
-        
-        
 
     }
 

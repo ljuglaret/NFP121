@@ -21,6 +21,8 @@ public class Appelant{
     }
 
     public void annuler(){
+                retablirCommandeStack.push(annulerCommandeStack.peek());
+
         if(!annulerCommandeStack.isEmpty()){
             if (annulerCommandeStack.peek()  instanceof CommandeConcreteColler){
                 CommandeConcreteColler derniere = (CommandeConcreteColler)annulerCommandeStack.peek();
@@ -33,11 +35,34 @@ public class Appelant{
                 derniere.annulerCouper();          
 
             }            
-            annulerCommandeStack.pop();
+           annulerCommandeStack.pop();
         }else{
             System.out.println("Rien à annuler");
         }
     }
+    
+    public String dernier(){
+          if (annulerCommandeStack.peek()  instanceof CommandeConcreteCopie){
+                CommandeConcreteCopie derniere = (CommandeConcreteCopie)annulerCommandeStack.peek();
+        return  derniere.getDonneesCopiees();
+
+            }
+            
+            if (annulerCommandeStack.peek()  instanceof CommandeConcreteCouper){
+                CommandeConcreteCouper derniere = (CommandeConcreteCouper)annulerCommandeStack.peek();
+        return  derniere.getDonneesCoupees();
+
+            }     
+            
+             if (annulerCommandeStack.peek()  instanceof CommandeConcreteColler){
+                CommandeConcreteColler derniere = (CommandeConcreteColler)annulerCommandeStack.peek();
+        return  derniere.getDonneesCollees();
+
+            }     
+
+    return "";                
+    }    
+    
 
     public void retablir(){
         if(!retablirCommandeStack.isEmpty()){

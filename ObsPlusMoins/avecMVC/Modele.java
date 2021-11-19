@@ -29,7 +29,7 @@ public  class Modele implements IObservable{
   
     public void notifierObservateurs( ){
         for (IObservateur obs : l){
-            obs.actualiser(this);
+            obs.actualiser(this,this.getValeur());
         }
     }
     

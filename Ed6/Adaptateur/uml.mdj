@@ -800,7 +800,7 @@
 											"top": 495,
 											"width": 151,
 											"height": 13,
-											"text": "Adaptateur"
+											"text": "FileEntiers"
 										},
 										{
 											"_type": "LabelView",
@@ -1564,6 +1564,50 @@
 							"headQualifiersCompartment": {
 								"$ref": "AAAAAAF87NcfOfoAc9M="
 							}
+						},
+						{
+							"_type": "UMLTextView",
+							"_id": "AAAAAAF88XYAwRn45kE=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"lineColor": "#1747a7",
+							"fontColor": "#0000d1",
+							"font": "Arial;17;0",
+							"left": 24,
+							"top": 432,
+							"width": 209,
+							"height": 90,
+							"text": "->Cible : FileEntiersI\n\n->Adaptateur : FileEntiers\n\n->Adapte : Buffer, ou plus largement CollectionI\n"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF88XmHmh0A7Ew=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 200,
+							"top": 624,
+							"width": 145,
+							"height": 38,
+							"text": "taille() = adapte.size()"
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAF88Xpe/R23q1M=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAF87NRO9/lTgl8="
+							},
+							"tail": {
+								"$ref": "AAAAAAF88XmHmh0A7Ew="
+							},
+							"lineStyle": 1,
+							"points": "296:623;345:585"
 						}
 					]
 				},
@@ -1750,7 +1794,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Adaptateur",
+					"name": "FileEntiers",
 					"ownedElements": [
 						{
 							"_type": "UMLDependency",
@@ -1792,8 +1836,29 @@
 									"$ref": "AAAAAAF87NRM6fkoBg8="
 								}
 							}
+						},
+						{
+							"_type": "UMLInterfaceRealization",
+							"_id": "AAAAAAF88XksThxGHe8=",
+							"_parent": {
+								"$ref": "AAAAAAF87NRO9/lRTWg="
+							},
+							"source": {
+								"$ref": "AAAAAAF87NRO9/lRTWg="
+							},
+							"target": {
+								"$ref": "AAAAAAF88XjlUxuR+Xs="
+							}
 						}
 					]
+				},
+				{
+					"_type": "UMLInterface",
+					"_id": "AAAAAAF88XjlUxuR+Xs=",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "Interface1"
 				}
 			]
 		}

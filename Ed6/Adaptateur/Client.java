@@ -4,7 +4,7 @@ package Adaptateur;
 public class Client
 {
    public Client() throws FilePleineException , FileVideException{
-            Adaptateur x = new Adaptateur(new Buffer(10));
+            FileEntiers x = new FileEntiers(new Buffer(10));
             x.enfiler(5);
             x.enfiler(2);
             x.enfiler(3);

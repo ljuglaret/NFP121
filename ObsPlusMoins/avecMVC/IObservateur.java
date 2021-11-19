@@ -2,7 +2,7 @@ package avecMVC;
 
 public interface IObservateur<T>{
 
-    public void actualiser(IObservable O);
+    public void actualiser(IObservable O , Object arg);
    
     
 }

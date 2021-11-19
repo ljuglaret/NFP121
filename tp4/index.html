@@ -131,7 +131,7 @@
 <p>
     <ul>
         <li>    Pile arguments = test A | A | testB | B</li>
-        <li>    Pile senders =   l1 | l1 | l2 | l2 | l2</li>    
+        <li>    Pile senders =   l1 | l1 | l2 | l2</li>    
     </ul>
 </p>
   
@@ -179,7 +179,7 @@
                     pile arguments = vide
                 </li>
                 <li>
-                    pile senders =   l1 | l2
+                    pile senders =   vide
                 </li>
             </ul>
             pour o2 
@@ -188,7 +188,7 @@
                     pile arguments = vide       
                 </li>
                 <li>
-                    pile senders = l1 | l2
+                    pile senders = vide
                 </li>
             </ul>
     </p>
@@ -576,8 +576,15 @@
     <br />
     <hr />
     <h3>Question 3.2</h3>
-
-    <br />
+    <img src="Main.png" alt="Tp1">
+    <p>
+    Concernant l'architecture en elle même : 
+    <li>Le modèle est un observable, c'est à lui de gérer les calculs (et non au contrôleur).</li>
+    <li>Le controleur doit transmettre les messages de la vue au modèle, il n' a pas à créer de JButton</li> 
+    <li>La vue est un observateur, elle connait et observe le modele.<br>
+        En conséquence du point précédent le controleur n'étend plus JPanel, il n'y a plus besoin de la ligne add(controle); dans la classe IHMCalculette</li>
+            
+    </p>
     <hr />
     <h3>Question 3.3</h3>
     <p>
@@ -587,12 +594,11 @@
             add(vue2);
         <span style='color:#3F7F5F'>/********************************/</span></pre>
     </p>
-    <img src="https://ljuglaret.github.io/NFP121/tp4/q3.png" alt="Tp1">
+    <img src="q3.png" alt="Tp1">
 
   
     <br />
     <hr />    
-        <h3>Conclusion, biliographie et remarques :</h3>
-        <a href="https://github.com/ljuglaret/NFP121/tree/gh-pages/tp4">Sources</a>
+        
 </body>
 </html>

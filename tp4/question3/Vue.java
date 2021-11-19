@@ -8,10 +8,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Décrivez votre classe Controleur ici.
- * 
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+Classe Controleur 
  */
 public class Vue extends JPanel implements Observer {// à compléter
 
@@ -30,7 +27,7 @@ public class Vue extends JPanel implements Observer {// à compléter
     }
 
     public void update(Observable obs, Object arg) {
-        etatPile.setText(pile.toString()); // ou obs.toString()
+        etatPile.setText(pile.toString());
     }
 
 }

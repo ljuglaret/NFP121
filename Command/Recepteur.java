@@ -16,10 +16,6 @@ public class Recepteur
         this.nom  = nom;
         contenu = new StringBuilder(init);
      }
- 
-    public void ajout(String texte){
-        contenu.append(texte);
-    }
      
     public String getContenu() {
         return contenu.toString();
@@ -34,8 +30,11 @@ public class Recepteur
         contenu = contenu.delete(debut , fin);
     }
      
-    public void coller(){
-        contenu.append(donneesEnMemoire);
+    public void coller(int position){
+        String gauche = contenu.substring(0,position);
+        String droite = contenu.substring(position , contenu.length());
+        contenu = new StringBuilder ("");
+        contenu.append(gauche + donneesEnMemoire + droite);
     }
      
     public void setContent(String content) {

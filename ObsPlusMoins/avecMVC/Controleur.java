@@ -18,13 +18,13 @@ public class Controleur
             new ActionListener(){
                 public void actionPerformed(ActionEvent ae){
                     vue.modele = new Modele(new Modele((vue.modele).getValeur()).sub());
-                    vue.actualiser(vue.modele);
+                    vue.actualiser(vue.modele, vue.modele.getValeur());
                 }});
         vue.plusAddActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent ae){
                     vue.modele = new Modele(new Modele((vue.modele).getValeur()).add());
-                    vue.actualiser(vue.modele);
+                    vue.actualiser(vue.modele,vue.modele.getValeur());
                 }});
     }
 }

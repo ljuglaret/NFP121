@@ -38,16 +38,7 @@ public class PatternObservateur extends junit.framework.TestCase {
         
         // vérifier que les deux observateurs ont bien été notifiés avec les
         // bons paramètres
-        /**
-        *Initialement : 
-        *   (par convention, le sommet est à droite)
-        *   pour o1 
-        *       pile arguments = test | 1
-        *       pile senders =   l1 | l1 
-        *    pour o2 
-        *       pile arguments = test | 1
-        *       pile senders = l1 | l1 
-        */
+
         assertFalse(o1.senders().empty());
         assertFalse(o2.senders().empty()); 
         assertEquals(l1, o1.senders().pop()); 
@@ -84,12 +75,7 @@ public class PatternObservateur extends junit.framework.TestCase {
 
 
         // vérifier que l'observateur a bien été notifié par les deux listes
-        /**
-        *Initialement : 
-        *   (par convention, le sommet est à droite)
-        *   pile arguments = test A | A | testB | B
-        *   pile senders =   l1 | l1 | l2 | l2 | l2
-        */
+    
         assertEquals(l2, o.senders().pop());
         assertEquals(l2, o.senders().pop());
         assertEquals(l1, o.senders().pop());
@@ -119,17 +105,11 @@ public class PatternObservateur extends junit.framework.TestCase {
         l2.addObserver(o1);
         l2.addObserver(o2);
         
+        assertTrue(o1.senders().empty() && o1.arguments().empty());
+        assertTrue(o2.senders().empty() && o2.arguments().empty());
+
         // vérifier le bon fonctionnement de countObservers(), de deleteObserver
-        /**
-        *Initialement : 
-        *   (par convention, le sommet est à droite)
-        *   pour o1 
-        *       pile arguments = vide
-        *       pile senders =   l1 | l2
-        *    pour o2 
-        *       pile arguments = vide
-        *       pile senders = l1 | l2
-        */
+
         assertTrue(l1.countObservers() == 2);
         assertTrue(l2.countObservers() == 2);
         

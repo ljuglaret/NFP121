@@ -71,13 +71,15 @@ public class Controleur extends JPanel {
         actualiserInterface();
     }
 
-    public void actualiserInterface() {
-        /**
+    /**
+         *  Autorise ou Interdit le clic sur les bouttons
          *  initial (taille = 0): pile vide, on ne peut que insérer un chiffre
          *  taille = 1 : seulement 1 chiffre a été saisi, on ne peut que l'effacer ou en saisir un autre
          *  taille = capacite : la pile est pleine
          *  dans tous les autres cas la pile a au moins deux éléments et n'est pas pleine, toutes les opérations sont donc autorisées
-         */
+    */
+    public void actualiserInterface() {
+
                     
             if(pile.estVide()) {
                 add.setEnabled(false);
@@ -185,7 +187,7 @@ public class Controleur extends JPanel {
     }
     
     /**
-    * Division
+    * Division 
     */
     public void div(){
          try{
@@ -209,6 +211,9 @@ public class Controleur extends JPanel {
     
     }
     
+    /**
+     * Efface tout 
+     */
       public void clear(){
         for(int i = this.pile.taille(); i >=0 ; i--){
             try{

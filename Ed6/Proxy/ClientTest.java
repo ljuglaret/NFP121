@@ -10,16 +10,15 @@ import org.junit.jupiter.api.Test;
 
 public class ClientTest
 {
-   ServiceI logon = new ServiceProxy();
+   ServiceI logon;
     public ClientTest()
     {
     }
 
   
     @BeforeEach
-    public void setUp() // throws java.lang.Exception
-    {
-             
+    public void setUp(){ // throws java.lang.Exception
+        logon = new ServiceProxy();
   
     }
 
@@ -41,10 +40,13 @@ public class ClientTest
 
     
     @Test
-    public void test(){
-        assertEquals(logon.requete("Marie","scala") , testOk("Marie","scala"));
-        assertEquals(logon.requete("Elsa","scala") , testOk("Elsa","scala"));
-
-        assertEquals(logon.requete("Eli","scala") , testNotOk("Eli","scala"));
+    public void testSend(){
+        assertEquals(logon.requete("Marie","url1") , testOk("Marie","url1"));
+        assertEquals(logon.requete("Elsa","url2") , testOk("Elsa","url2"));
+    }
+    
+    @Test
+    public void testDontSend(){
+        assertEquals(logon.requete("Eli","url1") , testNotOk("Eli","url1"));
     }
 }
