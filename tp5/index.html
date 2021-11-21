@@ -1,0 +1,527 @@
+<html>
+<head>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+    <title>NFP121 - TP5</title>
+    <style type="text/css">
+        body {
+            background: #E5DED6;
+            background-color: #fff;
+            color: #333333;
+            font-size: 14px;
+            font-family: Verdana, Arial;
+        }
+
+        table {
+            font-size: 20px;
+            border-color: #808080;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        h2 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        hr {
+            margin: 15px 0 15px 0;
+        }
+		
+		applet {
+			margin: 10px 0px 25px 250px;
+			border-width: 1px;
+			border-style: solid;
+			border-color: #777777;
+		}
+    </style>
+
+</head>
+<body>
+    <h2 style="text-align: center">NFP 121 - TP5</h2>
+    <h2 style="text-align: center">Classes abstraites, interface, h�ritage</h2>
+    <br />
+    <hr>
+    <br />
+    <table>
+        <tr>
+            <td>Nom
+            </td>
+            <td>Juglaret
+            </td>
+        </tr>
+        <tr>
+            <td>Prénom
+            </td>
+            <td>Laure
+            </td>
+        </tr>
+        <tr>
+            <td>Matricule
+            </td>
+            <td>0G5DRL8UNZ3
+            </td>
+        </tr>
+    </table>
+		
+	<br />
+    <hr />
+    <h3>Question 1.1</h3>
+    Dans un ensemble il n'y a pas de doublons. 
+    La méthode add est un booléen qui retourne vrai et ajoute l'élement t si ce lui ci n'est pas présent dans Ensemble, et retourne faux sinon.
+    <pre>
+        <code>
+            public boolean add(T t) {
+                if (this.contains(t)){
+                    return false;
+                }
+                else{
+                    return this.table.add(t);
+                }
+            }
+        </code>
+    </pre>
+
+	<br />
+    <hr />
+    <h3>Question 1.2</h3>
+    Pour tester l'ajout d'un élément dans un ensemble, j'ai utilisé les assertions assertTrue et assertFalse pour vérifier qu'il n'y avait pas de doublons.
+<pre>
+    <code>
+        public void testAdd() {
+            question1.Ensemble<Integer> e1, e2;
+            e1 = new question1.Ensemble<Integer>();
+            assertTrue(e1.add(2));
+            assertTrue(e1.add(3));
+            assertTrue(e1.add(6));
+            assertFalse(e1.add(3));
+            assertTrue(e1.add(8));
+            assertFalse(e1.add(2));
+        }
+    </code>
+</pre>
+	<br />
+    <hr />
+    <h3>Question 1.3</h3>
+    <ul>
+        <li>
+            union (A,B) = A + B
+            <pre>
+                <code language = "java">
+                    public Ensemble<T> union(Ensemble<? extends T> e) {
+                        Ensemble<T> union = new Ensemble<T>();
+                        union.addAll(this);
+                        union.addAll(e);
+                        return union; 
+                    }
+                </code>
+            </pre>
+        </li>
+        <li>
+            intersection(A,B) = A*B
+            <pre>
+                <code>
+                    public Ensemble<T> inter(Ensemble<? extends T> e) {
+                        Ensemble<T> inter = new Ensemble<T>();
+                        //on ajoute tous les éléments de A
+                        inter.addAll(this);
+                        //on retire ce qui ne sont pas dans B
+                        inter.retainAll(e);
+                        return inter;
+                    }
+                </code>
+            </pre>
+        </li>
+        <li>
+            difference(A,B) = A - (A * B)
+            <pre>
+                <code>
+                    public Ensemble<T> diff(Ensemble<? extends T> e) {
+                        Ensemble<T> difference = new Ensemble<T>();
+                        difference.addAll(this);
+                        difference.removeAll(this.inter(e));
+                        return difference; 
+                    }
+                </code>
+            </pre>
+         
+        </li>
+        <li>
+            difference symetrique(A,B) =  (A + B) - (A * B)
+            <pre>
+                <code>
+                    Ensemble<T> diffSym(Ensemble<? extends T> e) {
+                        return (this.union(e)).diff(this.inter(e));
+                   }
+                </code>
+            </pre>
+            <p>
+               
+                Au départ je voyais la différence symétrique comme étant (difference(A,B)) union (difference(B , A)), soit: 
+                    <br> (A - (A * B)) + (B - (A * B)) . 
+                    <br> = (A - A*B) + (B - A*B)
+                    <br> = (A - B) + (B - A)
+                    <br> Donc : (this.diff (e)).union(e.diff(this));
+                    <br> Problème : erreur de conversion entre T et extends T. D'où la solution proposée ci-dessus
+       
+            </p>
+        </li>
+    </ul>
+	<br />
+    <hr />
+    <h3>Question 1.4</h3>
+        Suite
+        <pre>
+            <code>
+                public void testUnion() {
+                    question1.Ensemble<Integer> e1, e2;
+                    e1 = new question1.Ensemble<Integer>();
+                    assertEquals(true, e1.add(2));
+                    assertEquals(true, e1.add(3));
+            
+                    e2 = new question1.Ensemble<Integer>();
+                    assertEquals(true, e2.add(3));
+                    assertEquals(true, e2.add(4));
+            
+                    question1.Ensemble<Integer> union = e1.union(e2);
+                    assertEquals(3, union.size());
+                    assertTrue(union.contains(2));
+                    assertTrue(union.contains(3));
+                    assertTrue(union.contains(4));
+                }
+                
+                public void testIntersection() {
+                    question1.Ensemble<Integer> e1, e2;
+                    e1 = new question1.Ensemble<Integer>();
+                    e1.add(2);
+                    e1.add(4);
+                    e1.add(1);
+                    e1.add(3);
+            
+                    e2 = new question1.Ensemble<Integer>();
+                    e2.add(5);
+                    e2.add(1);
+                    e2.add(2);
+                    e2.add(8);
+            
+                    question1.Ensemble<Integer> intersection = e1.inter(e2);
+                    assertEquals(2, intersection.size());
+                    assertTrue(intersection.contains(2));
+                    assertTrue(intersection.contains(1));
+                }
+                
+                    public void testDiff() {
+                    question1.Ensemble<Integer> e1, e2;
+                    e1 = new question1.Ensemble<Integer>();
+                    e1.add(2);
+                    e1.add(4);
+                    e1.add(1);
+                    e1.add(3);
+            
+                    e2 = new question1.Ensemble<Integer>();
+                    e2.add(5);
+                    e2.add(1);
+                    e2.add(2);
+                    e2.add(8);
+            
+                    question1.Ensemble<Integer> difference = e1.diff(e2);
+                    assertTrue(difference.contains(4));
+                    assertTrue(difference.contains(3));
+                }
+                
+                
+                    public void testDiffSy() {
+                    question1.Ensemble<Integer> e1, e2;
+                    e1 = new question1.Ensemble<Integer>();
+                    e1.add(2);
+                    e1.add(4);
+                    e1.add(1);
+                    e1.add(3);
+            
+                    e2 = new question1.Ensemble<Integer>();
+                    e2.add(5);
+                    e2.add(1);
+                    e2.add(2);
+                    e2.add(8);
+            
+                    question1.Ensemble<Integer> diffSym = e1.diffSym(e2);
+                    assertTrue(diffSym.contains(4));
+                    assertTrue(diffSym.contains(3));
+                    assertTrue(diffSym.contains(5));
+                    assertTrue(diffSym.contains(8));
+                }
+            </code>
+        </pre>
+
+	<br />
+    <hr />
+ 
+    <h3>Question 2.1</h3>
+    <li>
+        Obtention d'une liste de mots à partir de la constante CHAPITRE2.
+        <code>List<String> liste =  new LinkedList<String>();</code>
+    </li>
+    <li>
+        Obtention d'une liste de couples <String,Integer>, à partir la liste des mots ci-dessus.
+        <code>Map<String, Integer> table = new HashMap<String, Integer>();</code>
+    </li>
+
+
+    <br />
+    <hr />
+    <h3>Question 2.2</h3>
+
+    <pre>
+        <code>
+     
+public class JPanelListe extends JPanel implements ActionListener, ItemListener {
+
+    private JPanel cmd = new JPanel();
+    private JLabel afficheur = new JLabel();
+    private JTextField saisie = new JTextField();
+
+    private JPanel panelBoutons = new JPanel();
+    private JButton boutonRechercher = new JButton("rechercher");
+    private JButton boutonRetirer = new JButton("retirer");
+
+    private CheckboxGroup mode = new CheckboxGroup();
+    private Checkbox ordreCroissant = new Checkbox("croissant", mode, false);
+    private Checkbox ordreDecroissant = new Checkbox("décroissant", mode, false);
+
+    private JButton boutonOccurrences = new JButton("occurrence");
+
+    private TextArea texte = new TextArea();
+
+    private List<String> liste;
+    
+    //occurrence : obtention du nombre d'occurrences du mot présent dans la zone de saisie
+    private Map<String, Integer> occurrences;
+
+    public JPanelListe(List<String> liste, Map<String, Integer> occurrences) {
+        this.liste = liste;
+        this.occurrences = occurrences;
+
+        cmd.setLayout(new GridLayout(3, 1));
+
+        cmd.add(afficheur);
+        cmd.add(saisie);
+
+        panelBoutons.setLayout(new FlowLayout(FlowLayout.LEFT));
+        panelBoutons.add(boutonRechercher);
+        panelBoutons.add(boutonRetirer);
+        panelBoutons.add(new JLabel("tri du texte :"));
+        panelBoutons.add(ordreCroissant);
+        panelBoutons.add(ordreDecroissant);
+        panelBoutons.add(boutonOccurrences);
+        cmd.add(panelBoutons);
+
+        if(liste!=null && occurrences!=null){
+            afficheur.setText(liste.getClass().getName() + " et "+ occurrences.getClass().getName());
+            texte.setText(liste.toString());
+        }else{
+            texte.setText("la classe Chapitre2CoreJava semble incomplète");
+        }
+
+        setLayout(new BorderLayout());
+
+        add(cmd, "North");
+        add(texte, "Center");
+
+        boutonRechercher.addActionListener(this);
+
+        boutonRetirer.addActionListener(this);
+        ordreCroissant.addItemListener(this);
+        ordreDecroissant.addItemListener(this);
+        boutonOccurrences.addActionListener(this);
+
+
+    }
+
+    /** ne pas modifier les affichages, les classes de tests en ont besoin ... */
+    public void actionPerformed(ActionEvent ae) {
+        try {
+            //rechercher : recherche du mot tapé dans la zone de saisie; 
+            //le booléen, le résultat de la recherche est affiché. la touche Entrée du clavier a le même effet qu'une action effectuée sur ce bouton.
+            if (ae.getSource() == boutonRechercher || ae.getSource() == saisie) {
+                boolean contains = liste.contains(saisie.getText());
+                Integer occur = occurrences.get(saisie.getText());
+                afficheur.setText("résultat de la recherche de : "+ saisie.getText() + " -->  " + contains);
+            }
+            else if (ae.getSource() == boutonRetirer) {
+                boolean res = retirerDeLaListeTousLesElementsCommencantPar(saisie.getText());
+                afficheur.setText("résultat du retrait de tous les éléments commençant par -->  "+ saisie.getText() + " : " + res);
+            }
+            else if (ae.getSource() == boutonOccurrences) {
+                Integer occur = occurrences.get(saisie.getText());
+                if (occur != null)
+                    afficheur.setText(" -->  " + occur + " occurrence(s)");
+                else
+                    afficheur.setText(" -->  ??? ");
+            }
+            texte.setText(liste.toString());
+
+        } catch (Exception e) {
+            afficheur.setText(e.toString());
+        }
+    }
+
+    /**
+     * Trie la liste de String par ordre croissant ou décroissant
+     */
+    public void itemStateChanged(ItemEvent ie) {
+        if (ie.getSource() == ordreCroissant)
+            // tri "classique" de liste avec Collections.sort
+            Collections.sort(this.liste);
+        else if (ie.getSource() == ordreDecroissant)
+            // tri décroissant de liste avec l'interface Comparator
+            this.liste.sort(new Comparator<String>() {
+                @Override
+                public int compare(String str1,String str2) {
+                   return str2.compareTo(str1);
+            }});
+        
+        // liste a été trié selon le critère demandé par ie
+        // on transfère le contenu de liste dans texte
+        texte.setText(liste.toString());
+    }
+
+    /**
+     * retire de la liste tous les éléments commencant par préfixe. Retourne vrai si il a retiré au moins un élément, faux sinon.
+     * @param String prefixe
+     * @return boolean
+     */
+    private boolean retirerDeLaListeTousLesElementsCommencantPar(String prefixe) {
+        boolean res = false;
+        Iterator<String> iter = this.liste.iterator();
+        while(iter.hasNext()) {
+            String s = iter.next();
+            if (s.startsWith(prefixe)) {
+                iter.remove();
+                res = true; 
+                //La paire (clef, valeur) est (s , 0 ) pour indiquer que
+                // s n'a plus aucune occurences 
+                this.occurrences.put(s, 0);
+            }
+        }
+        return res;
+    }
+}
+        </code>
+    </pre>
+    <br />
+    <hr />
+    <h3>Question 2.3</h3>
+    Cette question utilise Memento. On aura besoin des objets des classes Caretaker et Originator : 
+    <pre>
+        <code>
+            Caretaker caretaker = new Caretaker();
+            Originator originator = new Originator();
+        </code>
+    </pre>
+    La méthode <code>  public void itemStateChanged(ItemEvent ie)  </code> est légèrement différente :  on ajouter une sauvegarde au dernier état de la liste.
+    <br> De même pour  <code>private boolean retirerDeLaListeTousLesElementsCommencantPar(String prefixe)</code>
+    <br>Dans la méthode <code>public void actionPerformed(ActionEvent ae) </code> il faut ajouter la gestion du boutton annuler.
+    <pre>
+        <code>
+            else if(ae.getSource() == boutonAnnuler){
+                try{
+                    if(!caretaker.estVide()){
+                        liste = originator.restoreFromMemento(caretaker.getMemento());
+                        occurrences = Chapitre2CoreJava2.occurrencesDesMots(this.liste); 
+                    }
+                    //Quand la pile est vide le bouton 'annuler' est sans effet
+                } catch (Exception e){}
+            }
+        </code>
+    </pre>
+
+    <br />
+    <hr />
+    <h3>Question 3.1</h3>
+    Classe TreeSetFactory
+        <pre>
+            <code>
+                public class TreeSetFactory<T extends Comparable>implements Factory<Set>{
+                    public Set create(){
+                       //en utilisant la classe concrete java.util.TreeSet,
+                       //attention dans ce cas les elements doivent etre comparables
+                        return new TreeSet<Comparable<T>>(); 
+                       }
+                   }
+            </code>
+        </pre>
+    Classe HashSetFactory
+    <pre>
+        <code>
+            public class HashSetFactory<T>implements Factory<Set>{
+                public Set create(){
+                   //en utilisant la classe concrete java.util.HashSet
+                    return new HashSet<T>(); 
+                   }
+               }
+        </code>
+    </pre>
+
+    <br />
+    <hr />
+    <h3>Question 3.2</h3>
+J'ai ajouté deux tests. Le premier vérifie que TreeSetFactory respecte la notion d'ordre, le second vérifie que HashSetFactory respecte la notion d'ensemble.
+    <pre>
+        <code>
+            public void test_TreeSetFactoryOrdre(){
+                try{
+                     question3.TreeSetFactory<Integer> treeSetF1 = new question3.TreeSetFactory<Integer>();
+                     java.util.Set<Integer> ts = treeSetF1.create();
+                     assertNotNull("appel de create retourne null ???", ts);
+                     assertEquals(" un TreeSet est attendu ???", ts.getClass().getName(), "java.util.TreeSet");
+                     assertEquals(true, ts.add(5));
+                     assertEquals(true, ts.add(2));
+                     assertEquals(true, ts.add(3));
+                     assertEquals(true, ts.add(1));
+            
+                     assertEquals("[1, 2, 3, 5]", ts.toString());
+                }catch(NoSuchMethodError e){
+                    fail(" exception : " + e.getMessage());
+                }catch(NoClassDefFoundError e){
+                    fail(" exception : " + e.getMessage());
+                }catch(Exception e){
+                    fail(" exception inattendue : " + e.getMessage());
+                }
+            }
+            
+            
+            public void test_HashSetFactory(){
+                try{
+                     question3.HashSetFactory<Integer> treeSetF1 = new question3.HashSetFactory<Integer>();
+                     java.util.Set<Integer> ts = treeSetF1.create();
+                     assertNotNull("appel de create retourne null ???", ts);
+                     assertEquals(" un HashSet est attendu ???", ts.getClass().getName(), "java.util.HashSet");
+                     assertEquals(true, ts.add(5));
+                     assertEquals(true, ts.add(3));
+                     assertEquals(false, ts.add(3));
+                     assertEquals("[3, 5]", ts.toString());
+                }catch(NoSuchMethodError e){
+                    fail(" exception : " + e.getMessage());
+                }catch(NoClassDefFoundError e){
+                    fail(" exception : " + e.getMessage());
+                }catch(Exception e){
+                    fail(" exception inattendue : " + e.getMessage());
+                }
+            }
+        </code>
+    </pre>
+
+    <br />
+    <hr />    
+        <h3>Conclusion, biliographie et remarques :</h3>
+        <i style="font-size:12px;">... Une seule page html, limitez le nombre de clics, (plus de 200 rapports � corriger chaque semaine)</i>
+</body>
+</html>
