@@ -1,0 +1,498 @@
+<html>
+<head>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+    <title>NFP121 - TP6</title>
+    <style type="text/css">
+        body {
+            background: #E5DED6;
+            background-color: #fff;
+            color: #333333;
+            font-size: 14px;
+            font-family: Verdana, Arial;
+        }
+
+        table {
+            font-size: 20px;
+            border-color: #808080;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        h2 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        hr {
+            margin: 15px 0 15px 0;
+        }
+		
+		applet {
+			margin: 10px 0px 25px 250px;
+			border-width: 1px;
+			border-style: solid;
+			border-color: #777777;
+		}
+
+        p{
+            margin-left: 20px;
+        }
+    </style>
+
+</head>
+<body>
+    <h2 style="text-align: center">NFP 121 - TP6</h2>
+    <h2 style="text-align: center">WhileL et les Visiteurs</h2>
+    <br />
+    <hr>
+    <br />
+    <table>
+        <tr>
+            <td>Nom
+            </td>
+            <td>Juglaret
+            </td>
+        </tr>
+        <tr>
+            <td>Prénom
+            </td>
+            <td>Laure
+            </td>
+        </tr>
+        <tr>
+            <td>Matricule
+            </td>
+            <td>0G5DRL8UNZ3
+            </td>
+        </tr>
+    </table>
+		
+	<br />
+    <hr />
+    <h3>Question 1</h3>
+    <h4>VisiteurEvaluation</h4>
+    <p>visite(Constante c) , visite(Variable v) changent un peu puisque on veut la valeur contenue de c (c.valeur()),
+    et  concernant la variable v on veut lire la valeur qu'elle a en mémoire (c.lire(v.nom()))
+
+    <br>Pour les méthodes Division, Addition, Multiplication, Soustraction, j'ai repris les méthodes de la classe VisiteurInfixe 
+    en enlevant les guillemets
+</p>
+    <pre>
+        <code>
+            public class VisiteurEvaluation extends VisiteurParDefaut<Integer> {
+
+                private Contexte c;
+            
+                public VisiteurEvaluation(Contexte c) {
+                    this.c = c;
+                }
+            
+                public Integer visite(Constante c) {
+                    return  (c.valeur());
+                }
+            
+                public Integer visite(Variable v) {
+                    return this.c.lire(v.nom());
+                }
+            
+                public Integer visite(Division d) {
+                    return  d.op1().accepter(this)  /  d.op2().accepter(this);
+                }
+            
+                public Integer visite(Addition a) {
+                    return  a.op1().accepter(this)  +  a.op2().accepter(this);
+            
+                }
+            
+                public Integer visite(Multiplication m) {
+                    return  m.op1().accepter(this)  *  m.op2().accepter(this);
+            
+                }
+            
+                public Integer visite(Soustraction s) {
+                    return  s.op1().accepter(this)  -  s.op2().accepter(this);
+            
+                }
+            
+                public Contexte contexte() {
+                    return c;
+                }
+                
+            }
+            
+        </code>
+    </pre>
+    En notation infixe une expression s'écrit : operande1 operateur2 operande.
+    <br>En notation prefixe une expression s'écrit : operande1 operande2 operateur.
+    <br>Donc j'ai repris la classe VisiteurInfixe en déplacant l'opérateur dans les méthodes Division, Addition, Multiplication, Soustraction
+    <h4>VisiteurPostfixe </h4>
+    <pre>
+        <code>
+            public class VisiteurPostfixe extends VisiteurParDefaut<String> {
+
+                private Contexte c;
+            
+                public VisiteurPostfixe(Contexte c) {
+                    this.c = c;
+                }
+            
+                public String visite(Constante c) {
+                    return Integer.toString(c.valeur());
+                }
+            
+                public String visite(Variable v) {
+                    return v.nom();
+                }
+            
+                public String visite(Division d) {
+                    return "(" + d.op1().accepter(this) + "," + d.op2().accepter(this)
+                            + ")/";
+                }
+            
+                public String visite(Addition a) {
+                    return "(" + a.op1().accepter(this) + "," + a.op2().accepter(this)
+                            + ")+";
+                }
+            
+                public String visite(Multiplication m) {
+                    return "(" + m.op1().accepter(this) + "," + m.op2().accepter(this)
+                            + ")*";
+                }
+            
+                public String visite(Soustraction s) {
+                    return "(" + s.op1().accepter(this) + "," + s.op2().accepter(this)
+                            + ")-";
+                }
+            
+                public Contexte contexte() {
+                    return c;
+                }
+                
+            }
+            
+        </code>
+    </pre>
+    <h4>Classes de tests</h4>
+    J'ai ajouté un test pour l'évaluation postfixe de l'expression (1,(3,2)*)+
+    
+    <pre>
+        <code>
+            public void testVisiteurPostfixe(){
+                Expression expr = new Addition(new Constante(1),new Multiplication(new Constante(3), new Constante(2)));
+                assertEquals("(1,(3,2)*)+", expr.accepter(vp));
+             }
+        
+        </code>
+    </pre>
+     
+    <br />
+    <hr />
+    <h3>Question 2.1 : Le visiteur "VisiteurBoolTojava"</h3>
+<pre>
+    <code>
+        public class VisiteurBoolToJava extends VisiteurExpressionBooleenne<String> {
+
+            private VisiteurExpression<String> ve;
+        
+            public VisiteurBoolToJava(VisiteurExpression<String> ve) {
+                this.ve = ve;
+            }
+        
+            public String visite(Vrai v) {
+                return "true";
+            }
+        
+            public String visite(Faux f) {
+                return "false";
+            }
+        
+            public String visite(Non n) {
+                return "!(" + n.bop().accepter(this) + ")";
+            }
+        
+            public String visite(Ou ou) {
+                return "(" + ou.bop1().accepter(this)+" || "+ou.bop2().accepter(this) + ")";
+            }
+        
+            public String visite(Et et) {
+                return "(" + et.bop1().accepter(this) + " && " + et.bop2().accepter(this)+ ")";
+            }
+        
+            public String visite(Sup sup) {
+                return "(" + sup.op1().accepter(ve) + " > " + sup.op2().accepter(ve) + ")";
+            }
+        
+            public String visite(Egal eg) {
+                return "(" + eg.op1().accepter(ve) +" == "+eg.op2().accepter(ve) + ")";
+            }
+        
+            public String visite(Inf inf) {
+                return "(" +  inf.op1().accepter(ve) + " < "+ inf.op2().accepter(ve) + ")";
+            }
+            
+        }
+    </code>
+</pre>
+    <br />
+    <hr />
+    <h3>Question 2.2 : Le visiteur "VisiteurBoolEvaluation"</h3>
+    Pour cette question j'ai repris ce que j'avais fait à la question 1.
+        <pre>
+            <code>
+                import question1.VisiteurExpression;
+
+                public class VisiteurBoolEvaluation extends VisiteurExpressionBooleenne<Boolean> {
+
+                    private VisiteurExpression<Integer> ve;
+
+                    public VisiteurBoolEvaluation(VisiteurExpression<Integer> ve) {
+                        this.ve = ve;
+                    }
+
+                    public Boolean visite(Vrai v) {
+                        return true;
+                    }
+
+                    public Boolean visite(Faux f) {
+                        return false;
+                    }
+
+                    public Boolean visite(Non n) { 
+                        return !n.bop().accepter(this); 
+                    }
+
+                    public Boolean visite(Ou ou) {
+                        return ou.bop1().accepter(this) || ou.bop2().accepter(this);
+                    }
+
+                    public Boolean visite(Et et) {
+                        return et.bop1().accepter(this) && et.bop2().accepter(this);
+                    }
+
+                    public Boolean visite(Sup sup) {
+                        return sup.op1().accepter(ve) > sup.op2().accepter(ve);
+                    }
+
+                    public Boolean visite(Egal eg) {
+                        return eg.op1().accepter(ve) == eg.op2().accepter(ve);
+                    }
+
+                    public Boolean visite(Inf inf) {
+                        return inf.op1().accepter(ve) < inf.op2().accepter(ve);
+                    }
+
+                }
+
+            </code>
+        </pre>
+    <br />
+    <hr />
+    <h3>Question 3.1</h3>
+    <h4>VisiteurInstEvaluation</h4>
+    <p>J'ai eu du mal pour la boucle tant que.
+    <br>Pour surmonter cette difficulté, je suis partie de la définition du tant que :
+    <br>tantque(cond, instructions) =
+    <br>Si (cond)
+    <br>Alors instructions
+    <br>     retourner tantque(cond, instructions)
+    </p>
+        <pre>
+            <code>
+                public class VisiteurInstEvaluation extends VisiteurInstruction<Contexte>{
+
+                    private VisiteurExpression<Integer> vi;
+                    private VisiteurExpressionBooleenne<Boolean> vb;
+                
+                    public VisiteurInstEvaluation(VisiteurExpression<Integer> vi, VisiteurExpressionBooleenne<Boolean> vb){
+                        this.vi = vi;
+                        this.vb = vb;
+                    }
+                
+                    public Contexte contexte(){
+                        return this.vi.contexte();
+                    }
+            
+                    public Contexte visite(Affectation a){
+                        this.vi.contexte().ecrire(a.v().nom(), a.exp().accepter(this.vi));
+                        return contexte();
+                    }
+                
+                    public Contexte visite(Sequence seq){
+                        seq.i1().accepter(this);
+                        seq.i2().accepter(this);
+                        
+                        return  this.vi.contexte();
+                    }
+                
+                    public Contexte visite(Selection sel){
+                        if(sel.cond().accepter(this.vb)){
+                            return sel.i1().accepter(this);
+                        }
+                        else{
+                            if (sel.i2() != null){
+                                return sel.i2().accepter(this); 
+                            }
+                            else{
+                                return this.vi.contexte();
+                            }
+                           
+                        }
+                    }
+                   
+                    public Contexte visite(TantQue tq){
+                        if (tq.cond().accepter(this.vb)){
+                             return new Sequence(tq.i1(),new TantQue(tq.cond(),tq.i1())).accepter(this);
+                        }
+                        
+                       return contexte();
+                    }
+                
+                    public Contexte visite(Afficher a){
+                        System.out.println(a.exp().accepter(this.vi));
+                        return  this.vi.contexte();
+                    }
+                   
+                    public Contexte visite(Assertion a) {
+                           if( ! a.cond().accepter(vb)){
+                                 throw new AssertionError(a.message());
+                               
+                            }
+                       
+                        return contexte();
+                    }
+                }
+            </code>
+        </pre>
+    <h4>VisiteurInstTojava</h4>
+    <pre>
+        <code>
+            public class VisiteurInstToJava extends VisiteurInstruction<String> {
+
+                private final static int TAB = 2;
+                private static final String lineSeparator = System.getProperties().getProperty("line.separator");
+            
+                private VisiteurExpression<String> vi;
+                private VisiteurExpressionBooleenne<String> vb;
+            
+                private int tabulations;
+            
+                public VisiteurInstToJava(VisiteurExpression<String> vi, VisiteurExpressionBooleenne<String> vb, int tabulations) {
+                    this.vi = vi;
+                    this.vb = vb;
+                    this.tabulations = tabulations;
+                }
+            
+                public char estAffectation (Instruction i){
+                    if (i instanceof Affectation){
+                        return ';' ;
+                    }
+                    else return ' ';
+                }
+                
+             
+                public VisiteurInstToJava(VisiteurExpression<String> vi, VisiteurExpressionBooleenne<String> vb) {
+                    this(vi, vb, 0);
+                }
+            
+                public Contexte contexte() {
+                    return this.vi.contexte();
+                }
+            
+                public String visite(Affectation a) {
+                    return a.v().accepter(this.vi) + "=" + a.exp().accepter(this.vi) ;
+                }
+            
+                public String visite(Sequence seq) {
+                    return seq.i1().accepter(this) + estAffectation(seq.i1())+ " \n" + seq.i2().accepter(this) + estAffectation(seq.i2());
+                }
+            
+                public String visite(Selection sel) {
+                     String str = "if " + sel.cond().accepter(this.vb) + " { " + sel.i1().accepter(this) + estAffectation(sel.i1());
+                    if (sel.i2() != null) str = str + "  }  \n else {  \n" + sel.i2().accepter(this)  + estAffectation(sel.i2())+  "} \n";
+                    
+            
+                    return str;
+                }
+            
+                public String visite(TantQue tq) {
+                    return "while" + tq.cond().accepter(this.vb) + "  {  \n" +
+                        tq.i1().accepter(this) + estAffectation(tq.i1()) +"} \n";
+                }
+        
+                public String visite(Afficher a) {
+                    return "System.out.println(" + a.exp().accepter(this.vi) + "); ";
+                }
+            
+                public String visite(Assertion a) {
+                    
+                    return "assert " + a.cond().accepter(this.vb) + " : "+a.message() +"; \n";
+                }
+            
+                private String tab(int n) {     
+                    String str = new String();
+            
+                    str = str + lineSeparator;
+                    for (int i = 0; i < this.tabulations + n; i++) {
+                        str = str + " ";
+                    }
+                    this.tabulations += n;
+                    return str;
+                }
+            
+            }
+            
+        </code>
+    </pre>
+    <br />
+    <hr />
+    <h3>Question 3.2 : La boucle pour</h3>
+
+    <pre>
+        <code>
+            public String visite(Pour pour) {
+                return "for(" + pour.init().accepter(this) + "; " + pour.cond().accepter(this.vb) + " ; "
+                       + pour.inc().accepter(this) + ") { \n" + pour.i1().accepter(this)
+                       + estAffectation(pour.i1())
+                       + "} \n";
+           }
+        </code>
+    </pre>
+    <p>Je n'ai pas compris les indications fournies en commentaire, donc pour fournir une implémentation 
+    j'ai "traduit" la boucle while en boucle for : </p>
+    <p>for (init , cond , inc) : i1;
+    <br>équivaut à
+        <br>init;
+        <br>while(cond) : i1;inc;
+    </p>
+    <pre>
+        <code>
+            public Contexte visite(Pour pour){
+        
+                Instruction instr = new Sequence(pour.init() ,
+                                       new TantQue(pour.cond(), 
+                                                   new Sequence (pour.i1(), pour.inc())));
+                instr.accepter(this);
+                
+                return contexte();
+            }
+        </code>
+    </pre>
+    
+
+
+
+    <br />
+    <hr />    
+        <h3>Conclusion, biliographie et remarques :</h3>
+        <i style="font-size:12px;">... Une seule page html, limitez le nombre de clics, (plus de 200 rapports � corriger chaque semaine)</i>
+</body>
+</html>

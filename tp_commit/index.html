@@ -1,0 +1,550 @@
+
+<html>
+<head>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+
+    <title>NFP121 - TP7</title>
+    <style type="text/css">
+        body {
+            background: #E5DED6;
+            background-color: #fff;
+            color: #333333;
+            font-size: 14px;
+            font-family: Verdana, Arial;
+        }
+
+        table {
+            font-size: 20px;
+            border-color: #808080;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        h2 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        hr {
+            margin: 15px 0 15px 0;
+        }
+    </style>
+<!--<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+-->
+</head>
+<body>
+    <h2 style="text-align: center">NFP 121 - TP 7</h2>
+    <h2 style="text-align: center">Les transactions</h2>
+    <br />
+    <hr>
+    <br />
+    <table>
+        <tr>
+            <td>Nom
+            </td>
+            <td>Juglaret
+            </td>
+        </tr>
+        <tr>
+            <td>Pr�nom
+            </td>
+            <td>Laure
+            </td>
+        </tr>
+        <tr>
+            <td>Matricule
+            </td>
+            <td>0G5DRL8UNZ3
+            </td>
+        </tr>
+    </table>
+    <br />
+    <hr />
+    <h2>Question 1 : Cotisants</h2>
+    <p>Les cotisants peuvent être des contributeurs(les feuilles du graphes, notées c),
+    ou bien des groupe de contributes(les noeuds du graphe notées g).
+    <br>Le schéma ci-dessous est un exemple de graphe pouvant être généré.
+    <br> J'ai choisi de prendre un exemple de Composite non valide (g3 n'a pas de contributeur), pour ne pas empiéter sur la question 2.1
+    </p>
+    <p style = "margin-left : 25%"><img  width="30%" src="images/Coti1.jpg"></p>
+    <h3>Question 1.1 :  Ecrire une implémentation complète de la classe Contributeur. </h3>
+    <pre>
+        <code class="language-java">
+            public class Contributeur extends Cotisant{
+                private int solde;
+                public Contributeur(String nom, int somme){
+                  super(nom);
+                  if (somme < 0){
+                        throw new RuntimeException("nombre n�gatif !!!");
+                      }
+                  solde = somme;
+                }
+                public int solde(){
+                  return this.solde;
+                }
+                
+                public int nombreDeCotisants(){
+                  return 1;
+                }
+                
+                  public void debit(int somme) throws SoldeDebiteurException{
+                    if (somme > solde){
+                          throw new SoldeDebiteurException();
+                      }
+                           if (somme < 0){
+                        throw new RuntimeException("nombre n�gatif !!!");
+                      }
+                      solde -= somme;
+                  }
+                  
+                  /**
+                   * throws RuntimeException new RuntimeException("nombre n�gatif !!!");
+                   */
+                public  void credit(int somme){
+                    if (somme < 0){
+                        throw new RuntimeException("nombre n�gatif !!!");
+                      }
+                      solde += somme;
+                  }
+                  
+                  /**
+                   * throws RuntimeException new RuntimeException("nombre n�gatif !!!");
+                   */
+                public void affecterSolde(int somme){
+                  if(somme < 0) throw new RuntimeException("nombre n�gatif !!!");
+                  try{
+                    debit(solde()); credit(somme); 
+                  }catch(SoldeDebiteurException sde){ 
+                    this.solde = somme; 
+                  }
+                }
+                
+                public <T> T accepter(Visiteur<T> visiteur){
+                  return visiteur.visite(this);
+                }
+                
+                public String toString(){
+                  return "<Contributeur : " + nom + "," + solde + ">";
+                }
+              
+              }
+              
+        </code>
+    </pre>
+
+    <hr />
+    <h3>Question 1.2 : Ecrire une implémentation complète de la classe GroupeDeContributeurs</h3>
+    <pre>
+        <code class="language-java">
+            public class GroupeDeContributeurs extends Cotisant implements Iterable<Cotisant>{
+                private List<Cotisant> liste;
+            
+                public GroupeDeContributeurs(String nomDuGroupe){
+                    super(nomDuGroupe);
+                    liste = new ArrayList<>();
+                }
+            
+                /**
+                 * ajoute un cotisant au groupe de contributeur
+                 * @param cotisant
+                 */
+                public void ajouter(Cotisant cotisant){
+                    assert cotisant!=null && cotisant.getParent()==null;
+                    this.liste.add(cotisant);   
+                    cotisant.setParent(this);
+                }
+            
+                /**
+                 * calcule le nombre de cotisants
+                 * @return int
+                 */
+                public int nombreDeCotisants(){
+                    int nombre = 0;
+                    for(Cotisant c : getChildren()) {
+                        nombre += c.nombreDeCotisants();
+                    }
+                    return nombre;
+                }
+            
+                /**
+                 * 
+                 * @return String
+                 */
+                public String toString(){
+                    String str = new String();
+                    str+=nom();
+                    for(Cotisant c : getChildren()) {
+                        str += c.toString();
+                    }
+                    return str;
+                }
+            
+                /**
+                 * renvoie tous les enfants du groupe de contributeurs
+                 * @return List<Cotisant>
+                 */
+                public List<Cotisant> getChildren(){
+            
+                    return this.liste;
+                }
+            
+                /**
+                 * retire somme à tous les cotisants du groupe de contributeurs
+                 * @param somme
+                 * @throws SoldeDebiteurException
+                 */
+                public void debit(int somme) throws SoldeDebiteurException{
+                    for (Cotisant cotisant : getChildren()){
+                        cotisant.debit(somme);
+                    }
+                }
+            
+                /**
+                 * ajoute somme à tous les cotisants du groupe de contributeurs
+                 * @param somme
+                 */
+                public void credit(int somme){
+                    for (Cotisant cotisant : getChildren()){
+                        cotisant.credit(somme);
+                    }
+                }
+            
+                /**
+                 * calcule la solde totale
+                 * @return int
+                 */
+                public int solde(){
+                    int solde = 0;
+                    for (Cotisant cotisant : getChildren()){
+                        solde += cotisant.solde();
+                    }
+                    return solde;
+                }
+            
+        </code>
+    </pre>
+    <hr />
+    <h3>Question 2.1 : Les visiteurs CompositeValide et SansDoublon</h3>
+    <h4>a) CompositeValide</h4>
+    <p>Lors des tests sur le serveur j'ai eu cette erreur
+    <br>testSurUnGroupeDeGroupeAvecDoublons(question2): Ce composite est valide, revoyez CompositeValide !!! 
+    <br>J'ai donc modifié la méthode  <code class="language-java">public Boolean visite(GroupeDeContributeurs g){...} </code>
+     pour ne plus utiliser contains (qui utilisait equals donc l'égalité sur les noms), mais == .
+    </p>
+     <p style = "margin-left : 25%"><img  width="30%" src="images/Coti2.jpg"></p>
+    <br> L'erreur est recrée dans la classe Main2.java
+    <h5>
+        Exemple d'un autre graphe valide avec doublons
+    </h5>
+    <p style = "margin-left : 25%"><img  width="30%" src="images/Coti3.jpg"></p>
+
+    <p>La visite d'un Contributeur est le cas de base. 
+        <br>Dans ce cas, on retourne l'évaluation de c.solde() >= valeur;
+        </p>
+        <p>
+         <br> On parcoure tous les cotisant de g récursivement en retournant faux si un enfant n'est pas valide.
+            <br>Avant le parcours de la liste des cotisants, il faut déterminer si la liste des enfants et non vide et qu'il n'y a pas de cycles.
+        </p>
+    <pre>
+        <code class="language-java">
+            public class CompositeValide implements Visiteur<Boolean>{
+                // Le solde de chaque contributeur doit �tre sup�rieur ou �gal � un nombre transmis en param�tre 
+                // et il n�existe pas de groupe n�ayant pas de contributeurs.
+                // groupe de contributeurs : pas de cycle
+                private int valeur;
+                private Stack<GroupeDeContributeurs> groupesDejaVus = new Stack();
+                public CompositeValide(int valeur){
+                    this.valeur = valeur;
+                }
+            
+                public CompositeValide(){
+                    this(0);
+                }
+            
+                /**
+                 * visite un contributeur c, renvoie vrai si il est valide
+                 * @param c
+                 * @return Boolean
+                 */
+                public Boolean visite(Contributeur c){
+                    return c.solde() >= valeur;
+                }
+            
+                /**
+                 * visite un contributeur g,renvoie vrai si il est valide
+                 * @param g
+                 * @return Boolean
+                 */
+                public Boolean visite(GroupeDeContributeurs g){
+                     //pas vide et  pas de cycles
+                    if(g.getChildren().isEmpty() ){
+                        return false;
+                    }
+                    for(GroupeDeContributeurs gr : groupesDejaVus ){
+                        if (gr == g){
+                            return false;
+                        }
+                    }
+                      //se souvenir qu'on l a vu (pour �viter un cycle)  
+                    groupesDejaVus.push(g);
+                      
+                    
+                    for (Cotisant cotisant : g.getChildren()){
+                        Boolean enfantValide = cotisant.accepter(this);
+                        if(!enfantValide){
+                            groupesDejaVus.pop();
+                            return false;
+                        }
+                    }
+                    groupesDejaVus.pop();        
+                    return true;
+                }
+            }
+        </code>
+    </pre>
+    <h4>b) SansDoublon</h4>
+    <p>La visite d'un Contributeur est le cas de base. 
+    <br>Dans ce cas, si le nom de c se trouve dans l'ensemble des noms déjà vu on retourne 
+    faux, sinon on l'ajoute à l'ensemble et on retourne vrai.
+    </p>
+    <p>
+     <br> On parcoure tous les cotisant de g récursivement en retournant faux si un enfant a des doublons.
+        <br>Avant le parcours de la liste des cotisants, il faut déterminer si le nom du groupe est présent dans l'ensemble des noms déjà vus.
+    </p>
+    <pre>
+        <code class="language-java">
+            public class SansDoublon implements Visiteur<Boolean>{
+                private Set<String> nomsDejaVus = new TreeSet<String>();
+                
+                /**
+                 * visite un contributeur c, renvoie vrai si il n'a pas de doublons
+                 * @param c
+                 * @return Boolean
+                 */
+                public Boolean visite(Contributeur c){
+                    if(nomsDejaVus.contains(c.nom())){
+                        return false;
+                    }
+                    else {
+                        nomsDejaVus.add(c.nom());
+                        return true;
+                    }
+                }
+                /**
+                 * visite un contributeur c, renvoie vrai si il n'a pas de doublons
+                 * @param c
+                 * @return Boolean
+                 */
+                public Boolean visite(GroupeDeContributeurs g){
+                    if(nomsDejaVus.contains(g.nom())){
+                        return false;
+                    }
+                    else {
+                        nomsDejaVus.add(g.nom());
+                    }
+                    for (Cotisant cotisant : g.getChildren()){
+                        Boolean pasDeDoublons = cotisant.accepter(this);
+                        if(!pasDeDoublons){
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            }
+        </code>
+    </pre>
+
+    <hr />
+    <h3>Question 2.2 : Le visiteur DebitMaximal</h3>
+    La visite d'un Contributeur est le cas de base. 
+    <br>Dans ce cas, le débit maximal est la solde du compte
+    <pre>
+        <code class="language-java">
+            public Integer visite(Contributeur c){
+                return c.solde();
+              }
+        </code>
+    </pre>
+     La visite d'un Groupe de contributeur est récursive.
+     <br> On parcoure tous les cotisant de g en cherchant le minimum des débits maximums.
+     <br> Le débit maximum de chaque enfant est calculé récursivement.
+    <pre>
+        <code class="language-java"></codeclass>
+            public Integer visite(GroupeDeContributeurs g){
+                int minDesDebitsMaxs = Integer.MAX_VALUE;
+                for (Cotisant cotisant : g.getChildren()){
+                    Integer enfantDebitMax = cotisant.accepter(this);
+                    if(enfantDebitMax < minDesDebitsMaxs){
+                        minDesDebitsMaxs =  enfantDebitMax;
+                    }
+                }
+               return minDesDebitsMaxs;
+              }
+        </code>
+    </pre>
+    <br />
+    <hr />
+    <h3>Question 3 :</h3>
+    <p>Pour le memento, le principe est le même que pour les trois visiteurs de la question 2 :
+    </p>
+        <pre><code class = "language-haskell">
+            case Contributeur of 
+                Contributeur contrib -> cas initial
+                GroupeDeContributeurs g -> recursion
+            </code>
+        </pre>
+
+        <p>Pour la sauvegarde j'ai utilisé une hashmap pour stocker les contributeurs et la valeur courante de leur solde.
+            <br> Dans le cas initial, cette hashmap est vide et je lui ajoute la clé contributeur avec comme valeur le solde associé à ce contributeur.
+            <br> Dans le cas GroupeDeContributeurs g, j'ajoute la paire (contributeur,contributeur.solde) récursivement.
+        </p>
+        <p>
+            Pour la restitution d'état : 
+            <br> Dans le cas initial, je verifie que le contributeur est dans la hashmap, si c'est le cas je lui affecte son ancien solde.
+            <br> Dans le cas GroupeDeContributeurs g, je restitue l'état récursivement.
+
+        </p>
+    
+    <pre>
+        <code class= "language-java">
+            public class Memento {
+                private HashMap<Contributeur ,Integer> contributeurEtValeurDeSonCompte = new HashMap<Contributeur ,Integer>() ;
+                public Memento(Cotisant c) {
+                    assert c!=null;
+                     // sauvegarde
+                    c.accepter(new Visiteur<Void>(){
+                            public Void visite(Contributeur contrib){
+                                contributeurEtValeurDeSonCompte.put(contrib,contrib.solde());
+                                return null;
+                            }
+                            public Void visite(GroupeDeContributeurs g){
+                                for (Cotisant cotisant : g.getChildren()){
+                                    cotisant.accepter(this);//this == Visiteur
+                                }
+                                return null;
+                            }
+                        });
+                }
+            
+                public void setState(Cotisant c) {
+                    assert c!=null;
+                    // restitution
+                    c.accepter(new Visiteur<Void>(){
+                            public Void visite(Contributeur contrib){
+                                //verifie que contrib est dans  contributeurEtValeurDeSonCompte
+                                if(contributeurEtValeurDeSonCompte.containsKey(contrib)){
+                                    int ancienSolde = contributeurEtValeurDeSonCompte.get(contrib);
+                                    contrib.affecterSolde(ancienSolde);
+                                }
+                                return null;
+                            }
+                            public Void visite(GroupeDeContributeurs g){
+                                for (Cotisant cotisant : g.getChildren()){
+                                    cotisant.accepter(this);//this == Visiteur
+                                }
+                                return null;
+                            }
+                        });
+                }
+            }
+        </code>
+    </pre>
+
+    Pour que la transaction "marche" j'ai mis à jour la méthode débit de la classe GroupeDeContributeurs (question1).
+    <pre>
+        <code class="language-java">
+            public void debit(int somme) throws SoldeDebiteurException{
+                Memento sauvegarde = new Memento(this);
+                try{
+                    for (Cotisant cotisant : getChildren()){
+                        cotisant.debit(somme);
+                    }
+                }
+                catch(SoldeDebiteurException e){
+                    sauvegarde.setState(this);
+                    throw e;
+                }
+            }
+        
+        </code>
+    </pre>
+    <pre>
+        <code class="language-java">
+            public TransactionDebit(Cotisant cotisant){
+                super(cotisant);
+                this.gardien = new Gardien();
+            }
+            
+          /**
+           * Commence une transaction
+           */
+          public void beginTransaction(){
+             Memento instantane = new Memento(cotisant);
+             gardien.setMemento(instantane);
+          }
+          
+          /**
+           * Commit
+           */
+          public void endTransaction(){
+              gardien.getMemento();
+          }
+          
+          /**
+           * Restitue l'état précédent
+           */
+          public  void rollbackTransaction(){
+            Memento instantane = gardien.getMemento();
+            instantane.setState(cotisant);
+          }
+        }
+        </code>
+    </pre>
+    <br />
+    <hr />
+    <h3>Question 4 :  Une interface graphique</h3>
+    <pre>
+        <code class= "language-java">
+            debiter.addActionListener(new ActionListener(){  
+                public void actionPerformed(ActionEvent e){  
+                    
+                    AbstractTransaction transactionMoins = new TransactionDebit(g);
+                    try{
+                        transactionMoins.debit(Integer.parseInt(somme.getText()));
+                        actualiser();
+                    }
+                    catch(NumberFormatException ex){}
+                    catch (question1.SoldeDebiteurException sde){}
+                   
+                }  
+            });  
+            crediter.addActionListener(new ActionListener(){  
+                public void actionPerformed(ActionEvent e){  
+                    g.credit(Integer.parseInt(somme.getText()));
+                    actualiser();
+                       
+                }  
+            });  
+        </code>
+    </pre>
+    <br />
+    <hr />
+    
+        <h3>Conclusion, biliographie et remarques :</h3>
+        <i style="font-size:12px;">... Une seule page html, limitez le nombre de clics, (plus de 200 rapports � corriger chaque semaine)</i>
+        <!--<script>hljs.highlightAll();</script> -->
+</body>
+</html>

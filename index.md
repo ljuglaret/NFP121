@@ -16,6 +16,9 @@
 -   [tp3](https://ljuglaret.github.io/NFP121/tp3/)
 -   [tp4](https://ljuglaret.github.io/NFP121/tp4/)
 -   [tp5](https://ljuglaret.github.io/NFP121/tp5/)
+-   [tp6](https://ljuglaret.github.io/NFP121/tp6/)
+-   [tp Commit](https://ljuglaret.github.io/NFP121/tp_commit/)
+
 
 
 ## Pattern exemples
