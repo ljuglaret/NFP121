@@ -15,7 +15,7 @@
 -   [tp2](https://ljuglaret.github.io/NFP121/tp2/)
 -   [tp3](https://ljuglaret.github.io/NFP121/tp3/)
 -   [tp4](https://ljuglaret.github.io/NFP121/tp4/)
--   [tp4](https://ljuglaret.github.io/NFP121/tp5/)
+-   [tp5](https://ljuglaret.github.io/NFP121/tp5/)
 
 
 ## Pattern exemples
@@ -24,6 +24,8 @@
 -   [Visiteur](https://ljuglaret.github.io/VisiteurVsCaseOf/)
 -   [Proxy (Ed6)](https://ljuglaret.github.io/NFP121/Ed6/Proxy/)
 -   [Commande](https://ljuglaret.github.io/NFP121/Command)
+-   [Decorateur](https://ljuglaret.github.io/NFP121/Decorator)
+
 
 
 
